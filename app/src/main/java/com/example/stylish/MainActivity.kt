@@ -19,6 +19,9 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.compose.rememberNavController
+import com.example.stylish.graphs.RootNavGraph
+import com.example.stylish.ui.screens.main.MainScreen
 import com.example.stylish.ui.theme.DancingScript
 import com.example.stylish.ui.theme.StylishTheme
 
@@ -32,23 +35,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Column(
-                        modifier = Modifier.fillMaxSize()
-                    ) {
-                        Row(
-                            modifier = Modifier.fillMaxWidth()
-                                .padding(start = 10.dp, top = 10.dp)
-                        ) {
-                            Text(
-                                text = "Stylish",
-                                style = LocalTextStyle.current.copy(
-                                    fontFamily = DancingScript,
-                                    fontSize = 35.sp,
-                                    fontStyle = FontStyle.Italic,
-                                )
-                            )
-                        }
-                    }
+                    RootNavGraph(navController = rememberNavController())
                 }
             }
         }
