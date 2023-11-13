@@ -1,4 +1,4 @@
-package com.example.stylish
+package com.example.stylish.ui
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -24,7 +24,9 @@ import com.example.stylish.graphs.RootNavGraph
 import com.example.stylish.ui.screens.main.MainScreen
 import com.example.stylish.ui.theme.DancingScript
 import com.example.stylish.ui.theme.StylishTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
