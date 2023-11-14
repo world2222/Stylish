@@ -24,13 +24,30 @@ class CreateViewModel @Inject constructor(
     private val _pantsColor = mutableStateOf(Color.White)
     val pantsColor: State<Color> = _pantsColor
 
-    private val items = listOf(
-        FashionItem(
-            itemName = "Shirt",
-            itemColor = mutableStateOf(Color.White)
-        ),
+    var initialColor = mutableStateOf(Color.White)
 
+    val items = listOf(
+        FashionItem(
+            name = "Shirt",
+            color = mutableStateOf(Color.White),
+            initialColor = mutableStateOf(Color.White)
+        ),
+        FashionItem(
+            name = "Jacket",
+            color = mutableStateOf(Color.White),
+            initialColor = mutableStateOf(Color.White)
+        ),
+        FashionItem(
+            name = "Pants",
+            color = mutableStateOf(Color.White),
+            initialColor = mutableStateOf(Color.White)
+        )
     )
+
+    fun setColor(itemName: String, hexCode: String) {
+        items.find { it.name == itemName }?.color?.value =
+            Color(android.graphics.Color.parseColor("#$hexCode"))
+    }
 
 
     fun openDialog() {
@@ -55,6 +72,7 @@ class CreateViewModel @Inject constructor(
 }
 
 data class FashionItem(
-    val itemName: String,
-    val itemColor: State<Color>
+    val name: String,
+    val color: MutableState<Color>,
+    var initialColor: MutableState<Color>
 )

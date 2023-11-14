@@ -19,7 +19,6 @@ import com.github.skydoves.colorpicker.compose.AlphaTile
 import com.github.skydoves.colorpicker.compose.BrightnessSlider
 import com.github.skydoves.colorpicker.compose.ColorPickerController
 import com.github.skydoves.colorpicker.compose.HsvColorPicker
-import com.github.skydoves.colorpicker.compose.rememberColorPickerController
 
 @Composable
 fun ColorPicker(
@@ -49,10 +48,10 @@ fun ColorPicker(
         HsvColorPicker(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(200.dp)
+                .height(300.dp)
                 .padding(10.dp),
             controller = controller,
-            initialColor = viewModel.shirtColor.value,
+            initialColor = viewModel.initialColor.value,
             onColorChanged = {
                 // do something
                 viewModel.setShirtColor(it.hexCode)
