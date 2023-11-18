@@ -54,7 +54,7 @@ fun ColorPicker(
             initialColor = viewModel.initialColor.value,
             onColorChanged = {
                 // do something
-                viewModel.setShirtColor(it.hexCode)
+                viewModel.setColor("Shirt", it.hexCode)
             }
         )
         AlphaSlider(
