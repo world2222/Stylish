@@ -1,6 +1,7 @@
 package com.example.stylish.ui.screens.create
 
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
@@ -13,62 +14,68 @@ class CreateViewModel @Inject constructor(
 ) : ViewModel() {
 
     val items = listOf(
-        FashionItem(
-            name = ItemNames.Shirt.name,
-            isOpen = mutableStateOf(false),
-            color = mutableStateOf(Color.White),
-            initialColor = mutableStateOf(Color.White)
-        ),
-        FashionItem(
-            name = ItemNames.Jacket.name,
-            isOpen = mutableStateOf(false),
-            color = mutableStateOf(Color.White),
-            initialColor = mutableStateOf(Color.White)
-        ),
-        FashionItem(
-            name = ItemNames.Pants.name,
-            isOpen = mutableStateOf(false),
-            color = mutableStateOf(Color.White),
-            initialColor = mutableStateOf(Color.White)
-        )
+        FashionItem(name = ItemNames.Shirt.name),
+        FashionItem(name = ItemNames.Jacket.name),
+        FashionItem(name = ItemNames.Pants.name)
     )
 
-    fun getInitialColor(itemName: String): Color {
-        return items.find { it.name == itemName }!!.initialColor.value
+    private fun findItem(itemName: String): FashionItem? {
+        return items.find { it.name == itemName }
+    }
+
+    fun getInitialColor(itemName: String): Color? {
+        return findItem(itemName)?.initialColor?.value
     }
 
     fun setInitialColor(itemName: String, color: Color) {
-        items.find { it.name == itemName }!!.initialColor.value = color
+        findItem(itemName)?.setInitialColor(color)
     }
 
-    fun getColor(itemName: String): Color {
-        return items.find { it.name == itemName }!!.color.value
+    fun getColor(itemName: String): Color? {
+        return findItem(itemName)?.color?.value
     }
 
     fun setColor(itemName: String, hexCode: String) {
-        items.find { it.name == itemName }!!.color.value =
-            Color(android.graphics.Color.parseColor("#$hexCode"))
+        findItem(itemName)?.setColor(Color(android.graphics.Color.parseColor("#$hexCode")))
     }
 
-    fun getIsOpen(itemName: String): Boolean {
-        return items.find { it.name == itemName }!!.isOpen.value
+    fun getIsOpen(itemName: String): Boolean? {
+        return findItem(itemName)?.isOpen?.value
     }
 
     fun openDialog(itemName: String) {
-        items.find { it.name == itemName }!!.isOpen.value = true
+        findItem(itemName)?.setOpen(true)
     }
 
     fun closeDialog(itemName: String) {
-        items.find { it.name == itemName }!!.isOpen.value = false
+        findItem(itemName)?.setOpen(false)
     }
 }
 
 data class FashionItem(
     val name: String,
-    val isOpen: MutableState<Boolean>,
-    val color: MutableState<Color>,
-    val initialColor: MutableState<Color>
-)
+
+    private val _isOpen: MutableState<Boolean> = mutableStateOf(false),
+    val isOpen: State<Boolean> = _isOpen,
+
+    private val _color: MutableState<Color> = mutableStateOf<Color>(Color.White),
+    val color: State<Color> = _color,
+
+    private val _initialColor: MutableState<Color> = mutableStateOf<Color>(Color.White),
+    val initialColor: State<Color> = _initialColor
+) {
+    fun setOpen(isOpen: Boolean) {
+        _isOpen.value = isOpen
+    }
+
+    fun setColor(color: Color) {
+        _color.value = color
+    }
+
+    fun setInitialColor(color: Color) {
+        _initialColor.value = color
+    }
+}
 
 sealed class ItemNames(val name: String) {
     data object Shirt : ItemNames(name = "Shirt")

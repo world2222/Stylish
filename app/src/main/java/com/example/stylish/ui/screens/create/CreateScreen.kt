@@ -17,6 +17,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.stylish.ui.screens.create.component.ColorPicker
 import com.github.skydoves.colorpicker.compose.rememberColorPickerController
@@ -36,7 +37,7 @@ fun CreateScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .fillMaxHeight(0.5f)
-                .background(viewModel.getColor(ItemNames.Shirt.name)),
+                .background(viewModel.getColor(ItemNames.Shirt.name) ?: Color.White),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center
         ) {
@@ -49,7 +50,7 @@ fun CreateScreen(
         Row(
             modifier = Modifier
                 .fillMaxSize()
-                .background(viewModel.getColor(ItemNames.Pants.name)),
+                .background(viewModel.getColor(ItemNames.Pants.name) ?: Color.White),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center
         ) {
@@ -62,12 +63,12 @@ fun CreateScreen(
     }
 
     viewModel.items.forEach {
-        if (viewModel.getIsOpen(it.name)) {
+        if (viewModel.getIsOpen(it.name) == true) {
             val controller = rememberColorPickerController()
             AlertDialog(
                 onDismissRequest = {
                     viewModel.closeDialog(it.name)
-                    viewModel.setInitialColor(it.name, viewModel.getColor(it.name))
+                    viewModel.setInitialColor(it.name, viewModel.getColor(it.name) ?: Color.White)
                 }
             ) {
                 Card(
