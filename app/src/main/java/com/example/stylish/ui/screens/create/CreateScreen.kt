@@ -17,7 +17,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.stylish.ui.screens.create.component.ColorPicker
 import com.github.skydoves.colorpicker.compose.rememberColorPickerController
@@ -37,40 +36,45 @@ fun CreateScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .fillMaxHeight(0.5f)
-                .background(viewModel.items[0].color.value),
+                .background(viewModel.getColor(ItemNames.Shirt.name)),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center
         ) {
             FilledTonalButton(
-                onClick = { viewModel.openDialog() }
+                onClick = { viewModel.openDialog(ItemNames.Shirt.name) }
             ) {
                 Text(text = "Color")
             }
         }
         Row(
-            modifier = Modifier.fillMaxSize()
-                .background(Color.Gray)
+            modifier = Modifier
+                .fillMaxSize()
+                .background(viewModel.getColor(ItemNames.Pants.name)),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center
         ) {
             FilledTonalButton(
-                onClick = { viewModel.openDialog() }
+                onClick = { viewModel.openDialog(ItemNames.Pants.name) }
             ) {
                 Text(text = "Color")
             }
         }
     }
 
-    if (viewModel.isOpen.value) {
-        val controller = rememberColorPickerController()
-        AlertDialog(
-            onDismissRequest = {
-                viewModel.closeDialog()
-                viewModel.initialColor.value = viewModel.shirtColor.value
-            }
-        ) {
-            Card(
-                modifier = Modifier.fillMaxWidth()
+    viewModel.items.forEach {
+        if (viewModel.getIsOpen(it.name)) {
+            val controller = rememberColorPickerController()
+            AlertDialog(
+                onDismissRequest = {
+                    viewModel.closeDialog(it.name)
+                    viewModel.setInitialColor(it.name, viewModel.getColor(it.name))
+                }
             ) {
-                ColorPicker(controller = controller)
+                Card(
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    ColorPicker(controller = controller, item = it)
+                }
             }
         }
     }

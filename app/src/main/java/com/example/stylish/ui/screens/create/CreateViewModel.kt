@@ -1,7 +1,6 @@
 package com.example.stylish.ui.screens.create
 
 import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
@@ -12,67 +11,67 @@ import javax.inject.Inject
 class CreateViewModel @Inject constructor(
 
 ) : ViewModel() {
-    private val _isOpen = mutableStateOf(false)
-    val isOpen: State<Boolean> = _isOpen    // This value will be used in CreateScreen.
-
-    private val _shirtColor = mutableStateOf(Color.White)
-    val shirtColor: State<Color> = _shirtColor
-
-    private val _jacketColor = mutableStateOf(Color.White)
-    val jacketColor: State<Color> = _jacketColor
-
-    private val _pantsColor = mutableStateOf(Color.White)
-    val pantsColor: State<Color> = _pantsColor
-
-    var initialColor = mutableStateOf(Color.White)
 
     val items = listOf(
         FashionItem(
-            name = "Shirt",
+            name = ItemNames.Shirt.name,
+            isOpen = mutableStateOf(false),
             color = mutableStateOf(Color.White),
             initialColor = mutableStateOf(Color.White)
         ),
         FashionItem(
-            name = "Jacket",
+            name = ItemNames.Jacket.name,
+            isOpen = mutableStateOf(false),
             color = mutableStateOf(Color.White),
             initialColor = mutableStateOf(Color.White)
         ),
         FashionItem(
-            name = "Pants",
+            name = ItemNames.Pants.name,
+            isOpen = mutableStateOf(false),
             color = mutableStateOf(Color.White),
             initialColor = mutableStateOf(Color.White)
         )
     )
 
+    fun getInitialColor(itemName: String): Color {
+        return items.find { it.name == itemName }!!.initialColor.value
+    }
+
+    fun setInitialColor(itemName: String, color: Color) {
+        items.find { it.name == itemName }!!.initialColor.value = color
+    }
+
+    fun getColor(itemName: String): Color {
+        return items.find { it.name == itemName }!!.color.value
+    }
+
     fun setColor(itemName: String, hexCode: String) {
-        items.find { it.name == itemName }?.color?.value =
+        items.find { it.name == itemName }!!.color.value =
             Color(android.graphics.Color.parseColor("#$hexCode"))
     }
 
-
-    fun openDialog() {
-        _isOpen.value = true
+    fun getIsOpen(itemName: String): Boolean {
+        return items.find { it.name == itemName }!!.isOpen.value
     }
 
-    fun closeDialog() {
-        _isOpen.value = false
+    fun openDialog(itemName: String) {
+        items.find { it.name == itemName }!!.isOpen.value = true
     }
 
-    fun setShirtColor(hexCode: String) {
-        _shirtColor.value = Color(android.graphics.Color.parseColor("#$hexCode"))
-    }
-
-    fun setJacketColor(hexCode: String) {
-        _jacketColor.value = Color(android.graphics.Color.parseColor("#$hexCode"))
-    }
-
-    fun setPantsColor(hexCode: String) {
-        _pantsColor.value = Color(android.graphics.Color.parseColor("#$hexCode"))
+    fun closeDialog(itemName: String) {
+        items.find { it.name == itemName }!!.isOpen.value = false
     }
 }
 
 data class FashionItem(
     val name: String,
+    val isOpen: MutableState<Boolean>,
     val color: MutableState<Color>,
-    var initialColor: MutableState<Color>
+    val initialColor: MutableState<Color>
 )
+
+sealed class ItemNames(val name: String) {
+    data object Shirt : ItemNames(name = "Shirt")
+    data object Jacket : ItemNames(name = "Jacket")
+    data object Pants : ItemNames(name = "Pants")
+}

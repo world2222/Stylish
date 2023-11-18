@@ -14,6 +14,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.stylish.ui.screens.create.CreateViewModel
+import com.example.stylish.ui.screens.create.FashionItem
 import com.github.skydoves.colorpicker.compose.AlphaSlider
 import com.github.skydoves.colorpicker.compose.AlphaTile
 import com.github.skydoves.colorpicker.compose.BrightnessSlider
@@ -23,7 +24,8 @@ import com.github.skydoves.colorpicker.compose.HsvColorPicker
 @Composable
 fun ColorPicker(
     viewModel: CreateViewModel = hiltViewModel(),
-    controller: ColorPickerController
+    controller: ColorPickerController,
+    item: FashionItem
 ) {
 
 
@@ -51,10 +53,10 @@ fun ColorPicker(
                 .height(300.dp)
                 .padding(10.dp),
             controller = controller,
-            initialColor = viewModel.initialColor.value,
+            initialColor = viewModel.getInitialColor(item.name),
             onColorChanged = {
                 // do something
-                viewModel.setColor("Shirt", it.hexCode)
+                viewModel.setColor(item.name, it.hexCode)
             }
         )
         AlphaSlider(
