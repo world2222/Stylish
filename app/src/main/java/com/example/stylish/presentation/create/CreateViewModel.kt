@@ -1,10 +1,9 @@
-package com.example.stylish.ui.screens.create
+package com.example.stylish.presentation.create
 
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
+import com.example.stylish.model.create.FashionItem
+import com.example.stylish.model.create.ItemNames
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -50,35 +49,4 @@ class CreateViewModel @Inject constructor(
     fun closeDialog(itemName: String) {
         findItem(itemName)?.setOpen(false)
     }
-}
-
-data class FashionItem(
-    val name: String,
-
-    private val _isOpen: MutableState<Boolean> = mutableStateOf(false),
-    val isOpen: State<Boolean> = _isOpen,
-
-    private val _color: MutableState<Color> = mutableStateOf<Color>(Color.White),
-    val color: State<Color> = _color,
-
-    private val _initialColor: MutableState<Color> = mutableStateOf<Color>(Color.White),
-    val initialColor: State<Color> = _initialColor
-) {
-    fun setOpen(isOpen: Boolean) {
-        _isOpen.value = isOpen
-    }
-
-    fun setColor(color: Color) {
-        _color.value = color
-    }
-
-    fun setInitialColor(color: Color) {
-        _initialColor.value = color
-    }
-}
-
-sealed class ItemNames(val name: String) {
-    data object Shirt : ItemNames(name = "Shirt")
-    data object Jacket : ItemNames(name = "Jacket")
-    data object Pants : ItemNames(name = "Pants")
 }

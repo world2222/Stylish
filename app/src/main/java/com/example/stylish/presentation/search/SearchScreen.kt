@@ -1,4 +1,4 @@
-package com.example.stylish.ui.screens.search
+package com.example.stylish.presentation.search
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues

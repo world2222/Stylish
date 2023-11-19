@@ -1,4 +1,4 @@
-package com.example.stylish.ui.screens.mypage
+package com.example.stylish.presentation.mypage
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues

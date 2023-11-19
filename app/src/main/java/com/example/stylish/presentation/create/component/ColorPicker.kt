@@ -1,4 +1,4 @@
-package com.example.stylish.ui.screens.create.component
+package com.example.stylish.presentation.create.component
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -13,8 +13,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.example.stylish.ui.screens.create.CreateViewModel
-import com.example.stylish.ui.screens.create.FashionItem
+import com.example.stylish.model.create.FashionItem
+import com.example.stylish.presentation.create.CreateViewModel
 import com.github.skydoves.colorpicker.compose.AlphaSlider
 import com.github.skydoves.colorpicker.compose.AlphaTile
 import com.github.skydoves.colorpicker.compose.BrightnessSlider

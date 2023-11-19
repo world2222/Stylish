@@ -1,7 +1,6 @@
-package com.example.stylish.ui.screens.home
+package com.example.stylish.presentation.home
 
 import android.annotation.SuppressLint
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize

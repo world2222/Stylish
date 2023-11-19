@@ -5,10 +5,10 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.stylish.ui.screens.create.CreateScreen
-import com.example.stylish.ui.screens.home.HomeScreen
-import com.example.stylish.ui.screens.mypage.MyPageScreen
-import com.example.stylish.ui.screens.search.SearchScreen
+import com.example.stylish.presentation.create.CreateScreen
+import com.example.stylish.presentation.home.HomeScreen
+import com.example.stylish.presentation.mypage.MyPageScreen
+import com.example.stylish.presentation.search.SearchScreen
 
 @Composable
 fun MainNavGraph(

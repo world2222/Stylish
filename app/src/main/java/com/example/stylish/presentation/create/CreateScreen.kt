@@ -1,4 +1,4 @@
-package com.example.stylish.ui.screens.create
+package com.example.stylish.presentation.create
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -19,7 +19,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.example.stylish.ui.screens.create.component.ColorPicker
+import com.example.stylish.model.create.ItemNames
+import com.example.stylish.presentation.create.component.ColorPicker
 import com.github.skydoves.colorpicker.compose.rememberColorPickerController
 
 @OptIn(ExperimentalMaterial3Api::class)
