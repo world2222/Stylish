@@ -5,7 +5,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
-import com.example.stylish.ui.screens.home.HomeScreen
+import com.example.stylish.presentation.home.HomeScreen
 
 fun NavGraphBuilder.homeNavGraph(
     navController: NavHostController,

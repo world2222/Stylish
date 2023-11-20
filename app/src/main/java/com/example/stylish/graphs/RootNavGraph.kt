@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.stylish.ui.screens.main.MainScreen
+import com.example.stylish.presentation.main.MainScreen
 
 @Composable
 fun RootNavGraph(navController: NavHostController) {
