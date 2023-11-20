@@ -1,13 +1,18 @@
 package com.example.stylish.presentation.create
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Card
@@ -18,7 +23,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.stylish.R
 import com.example.stylish.model.create.ItemNames
 import com.example.stylish.presentation.create.component.ColorPicker
 import com.github.skydoves.colorpicker.compose.rememberColorPickerController
@@ -34,31 +42,43 @@ fun CreateScreen(
             .fillMaxSize()
             .padding(paddingValues)
     ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .fillMaxHeight(0.5f)
-                .background(viewModel.getColor(ItemNames.Shirt.name) ?: Color.White),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.Center
+        Box(modifier = Modifier
+            .fillMaxWidth()
+            .fillMaxHeight(0.5f)
         ) {
-            FilledTonalButton(
-                onClick = { viewModel.openDialog(ItemNames.Shirt.name) }
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .fillMaxHeight()
+                    .background(viewModel.getColor(ItemNames.Shirt.name) ?: Color.White)
+                    .clickable { viewModel.openDialog(ItemNames.Shirt.name) },
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Text(text = "Color")
+                Spacer(modifier = Modifier.height(45.dp))
+                Image(
+                    painter = painterResource(id = R.drawable.sweater),
+                    contentDescription = "shirt"
+                )
             }
+
         }
-        Row(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(viewModel.getColor(ItemNames.Pants.name) ?: Color.White),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.Center
+
+        Box(modifier = Modifier
+            .fillMaxSize()
         ) {
-            FilledTonalButton(
-                onClick = { viewModel.openDialog(ItemNames.Pants.name) }
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(viewModel.getColor(ItemNames.Pants.name) ?: Color.White)
+                    .clickable { viewModel.openDialog(ItemNames.Pants.name) },
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Text(text = "Color")
+                Image(
+                    painter = painterResource(id = R.drawable.pants),
+                    contentDescription = "shirt"
+                )
             }
         }
     }
