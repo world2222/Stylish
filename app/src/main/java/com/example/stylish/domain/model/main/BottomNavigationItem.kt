@@ -1,4 +1,4 @@
-package com.example.stylish.model.main
+package com.example.stylish.domain.model.main
 
 import androidx.compose.ui.graphics.vector.ImageVector
 

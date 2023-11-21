@@ -27,7 +27,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.stylish.R
-import com.example.stylish.model.create.ItemNames
+import com.example.stylish.domain.model.create.ItemNames
 import com.example.stylish.presentation.create.component.ColorPicker
 import com.github.skydoves.colorpicker.compose.rememberColorPickerController
 

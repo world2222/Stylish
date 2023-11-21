@@ -1,7 +1,7 @@
-package com.example.stylish.data.remote.dto
+package com.example.stylish.domain.repository
 
 import com.example.stylish.data.remote.dto.category.CategoryItem
 
-interface AsosApiService {
+interface AsosRepository {
     suspend fun getCategories(): List<CategoryItem>
 }
