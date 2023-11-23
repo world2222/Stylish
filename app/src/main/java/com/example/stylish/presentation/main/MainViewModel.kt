@@ -14,6 +14,7 @@ import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import com.example.stylish.graphs.MainGraph
 import com.example.stylish.domain.model.main.BottomNavigationItem
+import com.example.stylish.domain.repository.AsosRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

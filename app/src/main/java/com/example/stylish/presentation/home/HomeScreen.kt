@@ -18,6 +18,7 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import coil.compose.AsyncImage
 import com.example.stylish.ui.theme.DancingScript
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -53,11 +54,15 @@ fun HomeScreen(
             state = listState,
             contentPadding = PaddingValues(16.dp)
         ) {
-            items(viewModel.getCategories()) {
+            items(viewModel.getRandomWomenClothes()) { item ->
+                println(item.products?.get(0)?.imageURL)
                 Row(
                     modifier = Modifier.fillMaxWidth()
                 ) {
-                    Text(text = it.toString(), style = LocalTextStyle.current.copy(fontSize = 50.sp))
+                    AsyncImage(
+                        model = item.products?.get(0)?.imageURL,
+                        contentDescription = ""
+                    )
                 }
             }
         }

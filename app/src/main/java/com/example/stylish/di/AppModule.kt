@@ -2,8 +2,8 @@ package com.example.stylish.di
 
 import com.example.stylish.data.remote.dto.AsosApiService
 import com.example.stylish.data.remote.dto.AsosApiServiceImpl
-import com.example.stylish.domain.repository.AsosRepositoryImpl
 import com.example.stylish.domain.repository.AsosRepository
+import com.example.stylish.data.remote.repository.AsosRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -35,10 +35,12 @@ object AppModule {
             // Must delete before push!!!
             // -------------------------------------------------------------------------------------
             install(DefaultRequest) {
-                header("X-RapidAPI-Key", "")
-                header("X-RapidAPI-Host", "")
+                header("X-RapidAPI-Key", "824b4c3149msha9ec012c5492559p14b29ajsneeafcd381c27")
+                header("X-RapidAPI-Host", "asos2.p.rapidapi.com")
             }
             // -------------------------------------------------------------------------------------
+
+
         }
     }
 
