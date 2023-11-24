@@ -1,11 +1,11 @@
-package com.example.stylish.data.remote.dto.category
+package com.example.stylish.data.remote.dto.products
 
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Category(
+data class Products(
     @SerialName("status")
     val status: Boolean? = null,
     @SerialName("timestamp")

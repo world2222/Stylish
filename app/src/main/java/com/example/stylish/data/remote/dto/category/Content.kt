@@ -5,13 +5,13 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Content (
-    val title: String,
+data class Content(
+    @SerialName("title")
+    val title: String? = null,
+    @SerialName("subTitle")
     val subTitle: String? = null,
-
     @SerialName("webLargeImageUrl")
-    val webLargeImageURL: String? = null,
-
+    val webLargeImageUrl: String? = null,
     @SerialName("mobileImageUrl")
-    val mobileImageURL: String? = null
+    val mobileImageUrl: String? = null
 )

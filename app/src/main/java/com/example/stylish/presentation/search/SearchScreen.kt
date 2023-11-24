@@ -18,12 +18,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.stylish.domain.viewModel.SharedViewModel
 import com.example.stylish.presentation.home.HomeViewModel
 import com.example.stylish.presentation.search.component.SearchBarM3
 
 @Composable
 fun SearchScreen(
     paddingValues: PaddingValues,
+    sharedViewModel: SharedViewModel = hiltViewModel(),
     viewModel: SearchViewModel = hiltViewModel()
 ) {
     Column(
@@ -41,13 +43,12 @@ fun SearchScreen(
             state = listState,
             contentPadding = PaddingValues(16.dp)
         ) {
-            viewModel.getWomenCategories()?.let { categories ->
-                items(categories) { category ->
-                    Row(
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
-                        Text(text = category.content.title, style = LocalTextStyle.current.copy(fontSize = 50.sp))
-                    }
+            items(sharedViewModel.getCategoryWomen()) { category ->
+                println(category)
+                Row(
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    category.content?.title?.let { Text(text = it, style = LocalTextStyle.current.copy(fontSize = 32.sp)) }
                 }
             }
         }

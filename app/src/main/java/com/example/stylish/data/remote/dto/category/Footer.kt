@@ -5,7 +5,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Brand(
+data class Footer(
     @SerialName("id")
     val id: String? = null,
     @SerialName("content")

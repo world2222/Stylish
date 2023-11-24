@@ -19,12 +19,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
+import com.example.stylish.domain.viewModel.SharedViewModel
 import com.example.stylish.ui.theme.DancingScript
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun HomeScreen(
     paddingValues: PaddingValues,
+    sharedViewModel: SharedViewModel = hiltViewModel(),
     viewModel: HomeViewModel = hiltViewModel()
 ) {
     Scaffold(
@@ -54,17 +56,7 @@ fun HomeScreen(
             state = listState,
             contentPadding = PaddingValues(16.dp)
         ) {
-            items(viewModel.getRandomWomenClothes()) { item ->
-                println(item.products?.get(0)?.imageURL)
-                Row(
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    AsyncImage(
-                        model = item.products?.get(0)?.imageURL,
-                        contentDescription = ""
-                    )
-                }
-            }
+
         }
     }
 }

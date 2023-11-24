@@ -5,7 +5,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Brand(
+data class Children(
     @SerialName("id")
     val id: String? = null,
     @SerialName("content")

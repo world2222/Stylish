@@ -5,16 +5,9 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Link (
-    val linkType: LinkType? = null,
-    val brandSectionAlias: String? = null,
-
+data class Link(
+    @SerialName("linkType")
+    val linkType: String? = null,
     @SerialName("categoryId")
-    val categoryID: Long? = null,
-
-    @SerialName("webUrl")
-    val webURL: String? = null,
-
-    @SerialName("appUrl")
-    val appURL: String? = null
+    val categoryId: Int? = null
 )

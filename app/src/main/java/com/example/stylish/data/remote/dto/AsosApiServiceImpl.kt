@@ -2,7 +2,7 @@ package com.example.stylish.data.remote.dto
 
 import com.example.stylish.common.HttpRoutes
 import com.example.stylish.data.remote.dto.category.Category
-import com.example.stylish.data.remote.dto.item.Item
+import com.example.stylish.data.remote.dto.products.Product
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.get
@@ -15,9 +15,7 @@ class AsosApiServiceImpl @Inject constructor(
         return client.get(HttpRoutes.CATEGORY).body()
     }
 
-    override suspend fun getItemListById(list: List<Long?>): List<Item> {
-        return list.map {
-            client.get(HttpRoutes.PRODUCT_LIST_START + it + HttpRoutes.PRODUCT_LIST_END).body()
-        }
+    override suspend fun getItemListById(id: Int): List<Product> {
+        return client.get(HttpRoutes.PRODUCT_LIST_START + id + HttpRoutes.PRODUCT_LIST_END).body()
     }
 }
