@@ -13,7 +13,7 @@ data class Facet(
     @SerialName("facetValues")
     val facetValues: List<FacetValue>,
     @SerialName("displayStyle")
-    val displayStyle: String,
+    val displayStyle: String? = "",
     @SerialName("facetType")
     val facetType: String,
     @SerialName("hasSelectedValues")
