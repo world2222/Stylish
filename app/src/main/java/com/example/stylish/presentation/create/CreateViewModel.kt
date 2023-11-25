@@ -2,8 +2,8 @@ package com.example.stylish.presentation.create
 
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
-import com.example.stylish.model.create.FashionItem
-import com.example.stylish.model.create.ItemNames
+import com.example.stylish.domain.model.create.FashionItem
+import com.example.stylish.domain.model.create.ItemNames
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

@@ -5,9 +5,9 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class CategoryItem(
+data class Link(
+    @SerialName("linkType")
+    val linkType: String? = null,
     @SerialName("categoryId")
-    val categoryId: Int,
-    @SerialName("title")
-    val title: String
+    val categoryId: Int? = null
 )

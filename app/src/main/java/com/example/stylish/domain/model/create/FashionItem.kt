@@ -1,4 +1,4 @@
-package com.example.stylish.model.create
+package com.example.stylish.domain.model.create
 
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State

@@ -1,4 +1,4 @@
-package com.example.stylish.model.create
+package com.example.stylish.domain.model.create
 
 sealed class ItemNames(val name: String) {
     data object Shirt : ItemNames(name = "Shirt")

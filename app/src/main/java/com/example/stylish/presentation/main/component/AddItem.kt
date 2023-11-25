@@ -8,7 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavHostController
-import com.example.stylish.model.main.BottomNavigationItem
+import com.example.stylish.domain.model.main.BottomNavigationItem
 
 @Composable
 fun RowScope.AddItem(
