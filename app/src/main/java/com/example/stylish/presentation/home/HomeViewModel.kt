@@ -7,8 +7,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.stylish.data.remote.dto.products.Product
 import com.example.stylish.data.remote.dto.products.Products
 import com.example.stylish.domain.repository.AsosRepository
-import com.example.stylish.domain.viewModel.CategoryNameWithId
-import com.example.stylish.domain.viewModel.SharedViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

@@ -1,4 +1,4 @@
-package com.example.stylish.domain.viewModel
+package com.example.stylish.domain.model
 
 data class CategoryNameWithId(
     val name: String? = null,
