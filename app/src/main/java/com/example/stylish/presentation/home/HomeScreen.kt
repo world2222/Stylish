@@ -2,7 +2,6 @@ package com.example.stylish.presentation.home
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -18,15 +17,13 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import coil.compose.AsyncImage
-import com.example.stylish.domain.viewModel.SharedViewModel
+import com.example.stylish.presentation.home.component.ItemInfo
 import com.example.stylish.ui.theme.DancingScript
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun HomeScreen(
     paddingValues: PaddingValues,
-    sharedViewModel: SharedViewModel = hiltViewModel(),
     viewModel: HomeViewModel = hiltViewModel()
 ) {
     Scaffold(
@@ -37,7 +34,7 @@ fun HomeScreen(
             Text(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(start = 10.dp, top = 10.dp),
+                    .padding(start = 10.dp, bottom = 8.dp),
                 text = "Stylish",
                 style = LocalTextStyle.current.copy(
                     fontFamily = DancingScript,
@@ -46,17 +43,24 @@ fun HomeScreen(
                 )
             )
         }
-    ) {
+    ) { topPadding ->
+
         val listState = rememberLazyListState()
 
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(it),
-            state = listState,
-            contentPadding = PaddingValues(16.dp)
+                .padding(topPadding),
+            state = listState
         ) {
-
+            items(viewModel.newIn.value) {
+                ItemInfo(
+                    brandName = it.brandName,
+                    itemName = it.name,
+                    imageUrl = "https://${it.imageUrl}",
+                    price = it.price.current.text
+                )
+            }
         }
     }
 }

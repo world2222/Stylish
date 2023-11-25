@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class Previous(
     @SerialName("value")
-    val value: Int? = null,
+    val value: Float? = null,
     @SerialName("text")
     val text: String
 )

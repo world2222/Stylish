@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -19,14 +18,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.stylish.domain.viewModel.SharedViewModel
-import com.example.stylish.presentation.home.HomeViewModel
 import com.example.stylish.presentation.search.component.SearchBarM3
 
 @Composable
 fun SearchScreen(
     paddingValues: PaddingValues,
-    sharedViewModel: SharedViewModel = hiltViewModel(),
-    viewModel: SearchViewModel = hiltViewModel()
+    sharedViewModel: SharedViewModel = hiltViewModel()
 ) {
     Column(
         modifier = Modifier
@@ -43,8 +40,7 @@ fun SearchScreen(
             state = listState,
             contentPadding = PaddingValues(16.dp)
         ) {
-            items(sharedViewModel.getCategoryWomen()) { category ->
-                println(category)
+            items(sharedViewModel.categoryWomen.value) { category ->
                 Row(
                     modifier = Modifier.fillMaxWidth()
                 ) {
