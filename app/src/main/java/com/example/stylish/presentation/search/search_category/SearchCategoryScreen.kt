@@ -1,12 +1,9 @@
-package com.example.stylish.presentation.home
+package com.example.stylish.presentation.search.search_category
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -14,17 +11,19 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltViewModel
-import com.example.stylish.presentation.home.component.ItemInfo
+import androidx.navigation.NavHostController
+import com.example.stylish.presentation.search.search_category.component.CategoryCards
 import com.example.stylish.ui.theme.DancingScript
 
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun HomeScreen(
+fun SearchCategoryScreen(
+    navController: NavHostController,
     paddingValues: PaddingValues,
-    viewModel: HomeViewModel = hiltViewModel()
+    gender: String
 ) {
     Scaffold(
         modifier = Modifier
@@ -34,7 +33,8 @@ fun HomeScreen(
             TopAppBar(
                 title = {
                     Text(
-                        text = "Stylish",
+                        modifier = Modifier.padding(start = 10.dp, bottom = 8.dp),
+                        text = gender,
                         fontFamily = DancingScript,
                         fontSize = 35.sp,
                         fontStyle = FontStyle.Italic,
@@ -42,24 +42,11 @@ fun HomeScreen(
                 }
             )
         }
-    ) { topPadding ->
-
-        val listState = rememberLazyListState()
-
-        LazyColumn(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(topPadding),
-            state = listState
-        ) {
-            items(viewModel.newIn.value) {
-                ItemInfo(
-                    brandName = it.brandName,
-                    itemName = it.name,
-                    imageUrl = "https://${it.imageUrl}",
-                    price = it.price.current.text
-                )
-            }
-        }
+    ) {
+        CategoryCards(
+            paddingValues = it,
+            gender = gender,
+            navController = navController
+        )
     }
 }

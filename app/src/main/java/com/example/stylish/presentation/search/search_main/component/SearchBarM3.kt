@@ -1,4 +1,4 @@
-package com.example.stylish.presentation.search.component
+package com.example.stylish.presentation.search.search_main.component
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
@@ -10,12 +10,12 @@ import androidx.compose.material3.SearchBar
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.example.stylish.presentation.search.SearchViewModel
+import com.example.stylish.presentation.search.search_main.SearchMainViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SearchBarM3(
-    viewModel: SearchViewModel = hiltViewModel()
+    viewModel: SearchMainViewModel = hiltViewModel()
 ) {
     SearchBar(
         query = viewModel.getQuery(),
