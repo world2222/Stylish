@@ -71,7 +71,6 @@ fun CategoryCards(
                         .padding(8.dp)
                         .clip(RoundedCornerShape(10.dp))
                         .clickable {
-                            println("Clicked this item!!")
                             navController.navigate(SearchDetailScreen.ProductsScreen.route + "/${item.link?.categoryId}") },
                 ) {
                     Box(

@@ -1,6 +1,7 @@
 package com.example.stylish.presentation.home.component
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -19,13 +20,18 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import coil.compose.AsyncImagePainter
 import coil.compose.rememberAsyncImagePainter
+import com.example.stylish.graphs.HomeDetailScreen
+import com.example.stylish.graphs.RootGraph
 import java.util.Locale
 
 @Composable
 fun ItemInfo(
+    navController: NavController,
     brandName: String,
+    itemId: Int,
     itemName: String,
     imageUrl: String,
     price: String
@@ -63,7 +69,9 @@ fun ItemInfo(
             Image(
                 painter = image,
                 contentDescription = "image",
-                modifier = Modifier.fillMaxSize()
+                modifier = Modifier
+                    .fillMaxSize()
+                    .clickable { navController.navigate(HomeDetailScreen.DetailScreen.route + "/${itemId}") }
             )
             if (image.state is AsyncImagePainter.State.Loading) {
                 CircularProgressIndicator(Modifier

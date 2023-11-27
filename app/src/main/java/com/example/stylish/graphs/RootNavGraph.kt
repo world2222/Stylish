@@ -2,8 +2,11 @@ package com.example.stylish.graphs
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
+import com.example.stylish.presentation.detail.DetailScreen
 import com.example.stylish.presentation.main.MainScreen
 
 @Composable

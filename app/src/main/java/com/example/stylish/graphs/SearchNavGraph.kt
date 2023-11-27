@@ -43,6 +43,7 @@ fun NavGraphBuilder.searchNavGraph(
         ) { backStackEntry ->
             backStackEntry.arguments?.getString("categoryId")?.let {
                 ProductsScreen(
+                    navController = navController,
                     paddingValues = paddingValues,
                     categoryId = it
                 )
@@ -52,7 +53,7 @@ fun NavGraphBuilder.searchNavGraph(
 }
 
 sealed class SearchDetailScreen(val route: String) {
-    data object SearchMainScreen : SearchDetailScreen(route = "SearchMain")
-    data object SearchCategoryScreen : SearchDetailScreen(route = "SearchCategory")
-    data object ProductsScreen : SearchDetailScreen(route = "Products")
+    data object SearchMainScreen : SearchDetailScreen(route = "SearchMainScreen")
+    data object SearchCategoryScreen : SearchDetailScreen(route = "SearchCategoryScreen")
+    data object ProductsScreen : SearchDetailScreen(route = "ProductsScreen")
 }

@@ -16,14 +16,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavHostController
 import com.example.stylish.presentation.home.component.ItemInfo
-import com.example.stylish.presentation.main.MainViewModel
 import com.example.stylish.ui.theme.DancingScript
 
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun HomeScreen(
+    navController: NavHostController,
     paddingValues: PaddingValues,
     viewModel: HomeViewModel = hiltViewModel()
 ) {
@@ -55,7 +56,9 @@ fun HomeScreen(
         ) {
             items(viewModel.newIn.value) {
                 ItemInfo(
+                    navController = navController,
                     brandName = it.brandName,
+                    itemId = it.id,
                     itemName = it.name,
                     imageUrl = "https://${it.imageUrl}",
                     price = it.price.current.text

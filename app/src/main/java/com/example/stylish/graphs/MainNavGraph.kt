@@ -19,9 +19,10 @@ fun MainNavGraph(
         route = RootGraph.MainScreen.route,
         startDestination = MainGraph.HomeScreen.route
     ) {
-        composable(route = MainGraph.HomeScreen.route) {
-            HomeScreen(paddingValues = paddingValues)
-        }
+        homeNavGraph(
+            navController = navController,
+            paddingValues = paddingValues
+        )
         composable(route = MainGraph.CreateScreen.route) {
             CreateScreen(paddingValues = paddingValues)
         }
