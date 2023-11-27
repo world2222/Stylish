@@ -1,6 +1,7 @@
 package com.example.stylish.presentation.home
 
 import androidx.compose.runtime.State
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -21,6 +22,9 @@ class HomeViewModel @Inject constructor(
 
     private val _newIn = mutableStateOf<List<Product>>(listOf())
     val newIn: State<List<Product>> = _newIn
+
+    private val _categoryId = mutableIntStateOf(0)
+    val categoryId: State<Int> = _categoryId
     init {
         viewModelScope.launch {
             _productsList.value = service.getItemListById(2623)     // 2623 is the id of the "New in" category.

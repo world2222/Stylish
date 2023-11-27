@@ -1,6 +1,5 @@
-package com.example.stylish.presentation.home
+package com.example.stylish.presentation.search.products
 
-import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -21,12 +20,14 @@ import com.example.stylish.presentation.main.MainViewModel
 import com.example.stylish.ui.theme.DancingScript
 
 @OptIn(ExperimentalMaterial3Api::class)
-@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun HomeScreen(
+fun ProductsScreen(
     paddingValues: PaddingValues,
-    viewModel: HomeViewModel = hiltViewModel()
+    categoryId: String,
+    viewModel: ProductsViewModel = hiltViewModel()
 ) {
+    viewModel.getProductList(categoryId.toInt())
+
     Scaffold(
         modifier = Modifier
             .fillMaxSize()
@@ -35,7 +36,7 @@ fun HomeScreen(
             TopAppBar(
                 title = {
                     Text(
-                        text = "Stylish",
+                        text = viewModel.categoryName.value,
                         fontFamily = DancingScript,
                         fontSize = 35.sp,
                         fontStyle = FontStyle.Italic,
@@ -53,7 +54,7 @@ fun HomeScreen(
                 .padding(topPadding),
             state = listState
         ) {
-            items(viewModel.newIn.value) {
+            items(viewModel.productList.value) {
                 ItemInfo(
                     brandName = it.brandName,
                     itemName = it.name,

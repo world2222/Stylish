@@ -1,4 +1,4 @@
-package com.example.stylish.presentation.search.search_category
+package com.example.stylish.presentation.search.category
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.PaddingValues
@@ -14,7 +14,7 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import com.example.stylish.presentation.search.search_category.component.CategoryCards
+import com.example.stylish.presentation.search.category.component.CategoryCards
 import com.example.stylish.ui.theme.DancingScript
 
 @OptIn(ExperimentalMaterial3Api::class)

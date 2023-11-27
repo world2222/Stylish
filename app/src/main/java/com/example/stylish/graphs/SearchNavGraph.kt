@@ -7,8 +7,9 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import androidx.navigation.navigation
-import com.example.stylish.presentation.search.search_category.SearchCategoryScreen
-import com.example.stylish.presentation.search.search_main.SearchMainScreen
+import com.example.stylish.presentation.search.category.SearchCategoryScreen
+import com.example.stylish.presentation.search.main.SearchMainScreen
+import com.example.stylish.presentation.search.products.ProductsScreen
 
 fun NavGraphBuilder.searchNavGraph(
     navController: NavHostController,
@@ -36,10 +37,22 @@ fun NavGraphBuilder.searchNavGraph(
                 )
             }
         }
+        composable(
+            route = SearchDetailScreen.ProductsScreen.route + "/{categoryId}",
+            arguments = listOf(navArgument("categoryId") { type = NavType.StringType })
+        ) { backStackEntry ->
+            backStackEntry.arguments?.getString("categoryId")?.let {
+                ProductsScreen(
+                    paddingValues = paddingValues,
+                    categoryId = it
+                )
+            }
+        }
     }
 }
 
 sealed class SearchDetailScreen(val route: String) {
     data object SearchMainScreen : SearchDetailScreen(route = "SearchMain")
     data object SearchCategoryScreen : SearchDetailScreen(route = "SearchCategory")
+    data object ProductsScreen : SearchDetailScreen(route = "Products")
 }

@@ -1,4 +1,4 @@
-package com.example.stylish.presentation.search.search_main
+package com.example.stylish.presentation.search.main
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -27,7 +27,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.example.stylish.graphs.SearchDetailScreen
-import com.example.stylish.presentation.search.search_main.component.SearchBarM3
+import com.example.stylish.presentation.search.main.component.SearchBarM3
 
 @Composable
 fun SearchMainScreen(

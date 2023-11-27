@@ -1,4 +1,4 @@
-package com.example.stylish.presentation.search.search_main
+package com.example.stylish.presentation.search.main
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf

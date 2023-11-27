@@ -1,4 +1,4 @@
-package com.example.stylish.presentation.search.search_category.component
+package com.example.stylish.presentation.search.category.component
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -8,7 +8,9 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -29,10 +31,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import coil.compose.AsyncImage
 import coil.compose.AsyncImagePainter
 import coil.compose.rememberAsyncImagePainter
 import com.example.stylish.domain.viewModel.SharedViewModel
+import com.example.stylish.graphs.SearchDetailScreen
+import com.example.stylish.presentation.main.MainViewModel
 
 @Composable
 fun CategoryCards(
@@ -67,7 +70,9 @@ fun CategoryCards(
                         .aspectRatio(1f)
                         .padding(8.dp)
                         .clip(RoundedCornerShape(10.dp))
-                        .clickable {  },
+                        .clickable {
+                            println("Clicked this item!!")
+                            navController.navigate(SearchDetailScreen.ProductsScreen.route + "/${item.link?.categoryId}") },
                 ) {
                     Box(
                         modifier = Modifier
@@ -87,19 +92,19 @@ fun CategoryCards(
                         )
                         Box(
                             modifier = Modifier
-                                .fillMaxSize()
+                                .fillMaxWidth()
+                                .fillMaxHeight(0.3f)
                                 .background(
                                     brush = Brush.verticalGradient(
-                                        colors = listOf(Color.Transparent, Color.Black),
-                                        startY = 320f
+                                        colors = listOf(Color.Transparent, Color.DarkGray)
                                     )
                                 )
                         )
                         item.content?.title?.let { title ->
                             Text(
                                 text = title,
-                                style = TextStyle(color = Color.White ,fontSize = 16.sp),
-                                modifier = Modifier.padding(12.dp)
+                                style = TextStyle(color = Color.White ,fontSize = 15.sp),
+                                modifier = Modifier.padding(10.dp)
                             )
                         }
                     }

@@ -8,7 +8,6 @@ import androidx.navigation.compose.composable
 import com.example.stylish.presentation.create.CreateScreen
 import com.example.stylish.presentation.home.HomeScreen
 import com.example.stylish.presentation.mypage.MyPageScreen
-import com.example.stylish.presentation.search.search_main.SearchMainScreen
 
 @Composable
 fun MainNavGraph(
