@@ -7,7 +7,10 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -17,7 +20,9 @@ import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -30,16 +35,20 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import coil.compose.AsyncImagePainter
+import coil.compose.rememberAsyncImagePainter
 import com.example.stylish.R
 
 @Composable
 fun DetailScreen(
     itemId: String,
-    viewModel: DetailViewModel = hiltViewModel()
+    viewModel: DetailViewModel = hiltViewModel(),
+    paddingValues: PaddingValues
 ) {
     viewModel.getItemDetail(itemId.toInt())
 
     DetailView(
+        paddingValues = paddingValues,
         brandName = viewModel.itemDetail.value.brand?.name?: "",
         imageList = viewModel.itemDetail.value.media?.images?.map { it.url }?: listOf(),
         itemName = viewModel.itemDetail.value.name?: "",
@@ -55,6 +64,7 @@ fun DetailScreen(
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun DetailView(
+    paddingValues: PaddingValues,
     brandName: String,
     imageList: List<String>,
     itemName: String,
@@ -64,6 +74,7 @@ fun DetailView(
     careInfo: String
 ) {
     Scaffold(
+        modifier = Modifier.padding(paddingValues),
         topBar = {
             TopAppBar(
                 title = {
@@ -86,12 +97,26 @@ fun DetailView(
 
             HorizontalPager(
                 state = pagerState,
-                beyondBoundsPageCount = imageList.size
-            ) {
-                Image(
-                    painter = painterResource(id = R.drawable.donut),
-                    contentDescription = "donut"
-                )
+                beyondBoundsPageCount = imageList.size,
+            ) {index ->
+                val image = rememberAsyncImagePainter(model = imageList[index])
+
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .aspectRatio(314f/400f)
+                ) {
+                    Image(
+                        painter = image,
+                        contentDescription = "image",
+                        modifier = Modifier.fillMaxSize()
+                    )
+                    if (image.state is AsyncImagePainter.State.Loading) {
+                        CircularProgressIndicator(
+                            Modifier.align(Alignment.Center)
+                        )
+                    }
+                }
             }
             Row(
                 Modifier
@@ -119,23 +144,33 @@ fun DetailView(
             ) {
                 Text(
                     text = itemName,
-                    fontSize = 25.sp
+                    style = LocalTextStyle.current.copy(
+                        fontSize = 25.sp
+                    )
                 )
                 Row(
                     modifier = Modifier.padding(top = 8.dp)
                 ) {
                     Text(
                         text = "Price : $curPrice",
-                        fontSize = 20.sp
+                        style = LocalTextStyle.current.copy(
+                            fontSize = 20.sp
+                        )
                     )
                     Text(
                         modifier = Modifier.padding(start = 16.dp, top = 4.dp),
                         text = "($prePrice)",
-                        fontSize = 16.sp
+                        style = LocalTextStyle.current.copy(
+                            fontSize = 16.sp
+                        )
                     )
                 }
-                Text(text = "About : $about", fontSize = 12.sp)
-                Text(text = "Careful! : $careInfo", fontSize = 12.sp)
+                Text(text = "About : $about", style = LocalTextStyle.current.copy(
+                    fontSize = 15.sp
+                ))
+                Text(text = "Careful! : $careInfo", style = LocalTextStyle.current.copy(
+                    fontSize = 15.sp
+                ))
             }
         }
     }

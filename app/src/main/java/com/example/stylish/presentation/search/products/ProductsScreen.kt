@@ -16,7 +16,7 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
-import com.example.stylish.presentation.home.component.ItemInfo
+import com.example.stylish.presentation.home.component.ItemInfoScreen
 import com.example.stylish.ui.theme.DancingScript
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -56,7 +56,7 @@ fun ProductsScreen(
             state = listState
         ) {
             items(viewModel.productList.value) {
-                ItemInfo(
+                ItemInfoScreen(
                     navController = navController,
                     brandName = it.brandName,
                     itemId = it.id,

@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class Current(
     @SerialName("value")
-    val value: Int,
+    val value: Float,
     @SerialName("text")
     val text: String,
     @SerialName("versionId")

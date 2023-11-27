@@ -7,8 +7,8 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import androidx.navigation.navigation
+import com.example.stylish.presentation.detail.DetailScreen
 import com.example.stylish.presentation.home.HomeScreen
-import com.example.stylish.presentation.search.products.ProductsScreen
 
 fun NavGraphBuilder.homeNavGraph(
     navController: NavHostController,
@@ -25,14 +25,13 @@ fun NavGraphBuilder.homeNavGraph(
             )
         }
         composable(
-            route = HomeDetailScreen.DetailScreen.route + "/{itemId}",
+            route = HomeDetailScreen.ItemDetailScreen.route + "/{itemId}",
             arguments = listOf(navArgument("itemId") { type = NavType.StringType })
         ) { backStackEntry ->
             backStackEntry.arguments?.getString("itemId")?.let {
-                ProductsScreen(
-                    navController = navController,
-                    paddingValues = paddingValues,
-                    categoryId = it
+                DetailScreen(
+                    itemId = it,
+                    paddingValues = paddingValues
                 )
             }
         }
@@ -41,5 +40,6 @@ fun NavGraphBuilder.homeNavGraph(
 
 sealed class HomeDetailScreen(val route: String) {
     data object HomeMainScreen: HomeDetailScreen(route = "HomeMainScreen")
-    data object DetailScreen: HomeDetailScreen(route = "DetailScreen")
+
+    data object ItemDetailScreen: HomeDetailScreen(route = "ItemDetailScreen")
 }

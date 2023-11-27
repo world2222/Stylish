@@ -42,7 +42,7 @@ data class Variant(
     @SerialName("isProp65Risk")
     val isProp65Risk: Boolean,
     @SerialName("ean")
-    val ean: String,
+    val ean: String? = null,
     @SerialName("seller")
     val seller: JsonElement? = null
 )

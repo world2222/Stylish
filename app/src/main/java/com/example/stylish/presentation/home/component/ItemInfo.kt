@@ -16,7 +16,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -28,7 +27,7 @@ import com.example.stylish.graphs.RootGraph
 import java.util.Locale
 
 @Composable
-fun ItemInfo(
+fun ItemInfoScreen(
     navController: NavController,
     brandName: String,
     itemId: Int,
@@ -71,7 +70,7 @@ fun ItemInfo(
                 contentDescription = "image",
                 modifier = Modifier
                     .fillMaxSize()
-                    .clickable { navController.navigate(HomeDetailScreen.DetailScreen.route + "/${itemId}") }
+                    .clickable { navController.navigate(HomeDetailScreen.ItemDetailScreen.route + "/${itemId}") }
             )
             if (image.state is AsyncImagePainter.State.Loading) {
                 CircularProgressIndicator(Modifier
