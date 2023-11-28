@@ -103,4 +103,7 @@ dependencies {
 
     // Extended Icons
     implementation("androidx.compose.material:material-icons-extended:1.5.4")
+
+    // observeAsState
+    implementation("androidx.compose.runtime:runtime-livedata:1.5.4")
 }

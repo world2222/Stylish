@@ -1,6 +1,8 @@
 package com.example.stylish.di
 
+import android.content.Context
 import com.example.stylish.data.local.HistoryDao
+import com.example.stylish.data.local.HistoryDatabase
 import com.example.stylish.data.local.HistoryRepository
 import com.example.stylish.data.remote.dto.AsosApiService
 import com.example.stylish.data.remote.dto.AsosApiServiceImpl
@@ -9,6 +11,7 @@ import com.example.stylish.data.remote.repository.AsosRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.android.Android
@@ -56,6 +59,21 @@ object AppModule {
     @Singleton
     fun provideAsosRepository(api: AsosApiService): AsosRepository {
         return AsosRepositoryImpl(api)
+    }
+
+
+
+    // Room Database
+    @Provides
+    @Singleton
+    fun provideHistoryDataBase(@ApplicationContext context: Context): HistoryDatabase {
+        return HistoryDatabase.getHistoryDatabase(context)
+    }
+
+    @Provides
+    @Singleton
+    fun provideHistoryDao(db: HistoryDatabase): HistoryDao {
+        return db.historyDao()
     }
 
     @Provides

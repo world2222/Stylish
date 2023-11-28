@@ -1,5 +1,7 @@
 package com.example.stylish.data.local.viewModel
 
+import androidx.compose.runtime.State
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -13,9 +15,10 @@ import javax.inject.Inject
 class HistoryViewModel @Inject constructor(
     private val historyRepository: HistoryRepository
 ) : ViewModel() {
-    private val historyList: LiveData<List<History>> = historyRepository.allHistories
-    fun getAllHistories(): List<History>? {
-        return historyRepository.getAllHistories()
+    val historyList: LiveData<List<History>> = historyRepository.allHistories
+
+    fun getAllHistories() {
+        historyRepository.getAllHistories()
     }
     fun addHistory(history: History) {
         historyRepository.addHistory(history)
