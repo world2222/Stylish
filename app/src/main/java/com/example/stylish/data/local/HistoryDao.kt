@@ -5,7 +5,6 @@ import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Query
 import androidx.room.Upsert
-import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface HistoryDao {
@@ -16,5 +15,5 @@ interface HistoryDao {
     suspend fun deleteHistory(history: History)
 
     @Query("SELECT * FROM History")
-    fun getHistories(): LiveData<List<History>>
+    fun getAllHistories(): List<History>
 }

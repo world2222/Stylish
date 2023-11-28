@@ -1,17 +1,30 @@
 package com.example.stylish.data.local
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class HistoryRepository(
     private val historyDao: HistoryDao
 ) {
-    suspend fun addHistory(history: History) {
-        historyDao.addHistory(history)
+
+    val allHistories = MutableLiveData<List<History>>()
+    private val coroutineScope = CoroutineScope(Dispatchers.Main)
+    fun addHistory(history: History) {
+        coroutineScope.launch(Dispatchers.IO) {
+            historyDao.addHistory(history)
+        }
     }
 
-    suspend fun deleteHistory(history: History) {
-        historyDao.deleteHistory(history)
+    fun deleteHistory(history: History) {
+        coroutineScope.launch(Dispatchers.IO) {
+            historyDao.deleteHistory(history)
+        }
     }
 
-    val getHistories: LiveData<List<History>> = historyDao.getHistories()
+    fun getAllHistories(): List<History>? {
+        return allHistories.value
+    }
 }

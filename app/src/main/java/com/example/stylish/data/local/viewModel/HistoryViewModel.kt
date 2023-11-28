@@ -1,32 +1,29 @@
 package com.example.stylish.data.local.viewModel
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.stylish.data.local.History
-import com.example.stylish.data.local.HistoryDatabase
 import com.example.stylish.data.local.HistoryRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class HistoryViewModel(application: Application) : AndroidViewModel(application) {
-
-    private val getHistories: LiveData<List<History>>
-    private val repository: HistoryRepository
-    init {
-        val historyDao = HistoryDatabase.getHistoryDatabase(application).historyDao()
-        repository = HistoryRepository(historyDao)
-        getHistories = repository.getHistories
+@HiltViewModel
+class HistoryViewModel @Inject constructor(
+    private val historyRepository: HistoryRepository
+) : ViewModel() {
+    private val historyList: LiveData<List<History>> = historyRepository.allHistories
+    fun getAllHistories(): List<History>? {
+        return historyRepository.getAllHistories()
     }
     fun addHistory(history: History) {
-        viewModelScope.launch {
-            repository.addHistory(history)
-        }
+        historyRepository.addHistory(history)
+        getAllHistories()
     }
 
     fun deleteHistory(history: History) {
-        viewModelScope.launch {
-            repository.deleteHistory(history)
-        }
+        historyRepository.deleteHistory(history)
+        getAllHistories()
     }
 }

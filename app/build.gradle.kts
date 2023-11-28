@@ -100,4 +100,7 @@ dependencies {
     val room_version = "2.6.0"
     implementation("androidx.room:room-ktx:$room_version")
     ksp("androidx.room:room-compiler:$room_version")
+
+    // Extended Icons
+    implementation("androidx.compose.material:material-icons-extended:1.5.4")
 }

@@ -5,9 +5,11 @@ import android.view.ViewGroup
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.TextView
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.History
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -23,17 +25,25 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.text.HtmlCompat
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.stylish.data.local.History
+import com.example.stylish.data.local.viewModel.HistoryViewModel
 import com.example.stylish.presentation.search.main.SearchMainViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SearchBarM3(
-    viewModel: SearchMainViewModel = hiltViewModel()
+    viewModel: SearchMainViewModel = hiltViewModel(),
+    dbViewModel: HistoryViewModel = hiltViewModel()
 ) {
     SearchBar(
         query = viewModel.getQuery(),
         onQueryChange = { viewModel.setQuery(it) },
-        onSearch = { },
+        onSearch = {
+            dbViewModel.addHistory(
+                history = History(viewModel.getQuery())
+            )
+            viewModel.toggleActive()
+        },
         active = viewModel.isActive(),
         onActiveChange = { viewModel.toggleActive() },
         placeholder = { Text(text = "Search your style!") },
@@ -56,6 +66,15 @@ fun SearchBarM3(
             }
         }
     ) {
-
+        dbViewModel.getAllHistories()?.forEach {
+            Row(modifier = Modifier.padding(16.dp)) {
+                Icon(
+                    modifier = Modifier.padding(end = 10.dp),
+                    imageVector = Icons.Default.History,
+                    contentDescription = "History Icon"
+                )
+                Text(text = it.keyword)
+            }
+        }
     }
 }

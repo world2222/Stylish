@@ -1,5 +1,7 @@
 package com.example.stylish.di
 
+import com.example.stylish.data.local.HistoryDao
+import com.example.stylish.data.local.HistoryRepository
 import com.example.stylish.data.remote.dto.AsosApiService
 import com.example.stylish.data.remote.dto.AsosApiServiceImpl
 import com.example.stylish.domain.repository.AsosRepository
@@ -54,5 +56,11 @@ object AppModule {
     @Singleton
     fun provideAsosRepository(api: AsosApiService): AsosRepository {
         return AsosRepositoryImpl(api)
+    }
+
+    @Provides
+    @Singleton
+    fun provideHistoryRepository(dao: HistoryDao): HistoryRepository {
+        return HistoryRepository(dao)
     }
 }
