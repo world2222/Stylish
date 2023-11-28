@@ -70,7 +70,7 @@ fun ItemInfoScreen(
                 contentDescription = "image",
                 modifier = Modifier
                     .fillMaxSize()
-                    .clickable { navController.navigate(HomeDetailScreen.ItemDetailScreen.route + "/${itemId}") }
+                    .clickable { navController.navigate(RootGraph.ItemDetailScreen.route + "/${itemId}") }
             )
             if (image.state is AsyncImagePainter.State.Loading) {
                 CircularProgressIndicator(Modifier

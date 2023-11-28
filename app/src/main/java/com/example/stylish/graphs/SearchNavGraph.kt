@@ -7,6 +7,7 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import androidx.navigation.navigation
+import com.example.stylish.presentation.detail.DetailScreen
 import com.example.stylish.presentation.search.category.SearchCategoryScreen
 import com.example.stylish.presentation.search.main.SearchMainScreen
 import com.example.stylish.presentation.search.products.ProductsScreen
@@ -47,6 +48,14 @@ fun NavGraphBuilder.searchNavGraph(
                     paddingValues = paddingValues,
                     categoryId = it
                 )
+            }
+        }
+        composable(
+            route = RootGraph.ItemDetailScreen.route + "/{itemId}",
+            arguments = listOf(navArgument("itemId") { type = NavType.StringType })
+        ) { backStackEntry ->
+            backStackEntry.arguments?.getString("itemId")?.let {
+                DetailScreen(itemId = it)
             }
         }
     }

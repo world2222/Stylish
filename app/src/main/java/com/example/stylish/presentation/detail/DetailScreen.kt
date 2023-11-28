@@ -31,24 +31,20 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImagePainter
 import coil.compose.rememberAsyncImagePainter
-import com.example.stylish.R
 
 @Composable
 fun DetailScreen(
     itemId: String,
-    viewModel: DetailViewModel = hiltViewModel(),
-    paddingValues: PaddingValues
+    viewModel: DetailViewModel = hiltViewModel()
 ) {
     viewModel.getItemDetail(itemId.toInt())
 
     DetailView(
-        paddingValues = paddingValues,
         brandName = viewModel.itemDetail.value.brand?.name?: "",
         imageList = viewModel.itemDetail.value.media?.images?.map { it.url }?: listOf(),
         itemName = viewModel.itemDetail.value.name?: "",
@@ -64,7 +60,6 @@ fun DetailScreen(
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun DetailView(
-    paddingValues: PaddingValues,
     brandName: String,
     imageList: List<String>,
     itemName: String,
@@ -74,7 +69,6 @@ fun DetailView(
     careInfo: String
 ) {
     Scaffold(
-        modifier = Modifier.padding(paddingValues),
         topBar = {
             TopAppBar(
                 title = {
@@ -99,7 +93,7 @@ fun DetailView(
                 state = pagerState,
                 beyondBoundsPageCount = imageList.size,
             ) {index ->
-                val image = rememberAsyncImagePainter(model = imageList[index])
+                val image = rememberAsyncImagePainter(model = "https://" + imageList[index])
 
                 Box(
                     modifier = Modifier

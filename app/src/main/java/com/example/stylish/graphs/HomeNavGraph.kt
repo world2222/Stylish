@@ -25,14 +25,11 @@ fun NavGraphBuilder.homeNavGraph(
             )
         }
         composable(
-            route = HomeDetailScreen.ItemDetailScreen.route + "/{itemId}",
+            route = RootGraph.ItemDetailScreen.route + "/{itemId}",
             arguments = listOf(navArgument("itemId") { type = NavType.StringType })
         ) { backStackEntry ->
             backStackEntry.arguments?.getString("itemId")?.let {
-                DetailScreen(
-                    itemId = it,
-                    paddingValues = paddingValues
-                )
+                DetailScreen(itemId = it)
             }
         }
     }
@@ -40,6 +37,4 @@ fun NavGraphBuilder.homeNavGraph(
 
 sealed class HomeDetailScreen(val route: String) {
     data object HomeMainScreen: HomeDetailScreen(route = "HomeMainScreen")
-
-    data object ItemDetailScreen: HomeDetailScreen(route = "ItemDetailScreen")
 }
