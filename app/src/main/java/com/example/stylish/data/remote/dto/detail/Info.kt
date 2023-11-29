@@ -10,7 +10,7 @@ data class Info(
     @SerialName("aboutMe")
     val aboutMe: String,
     @SerialName("sizeAndFit")
-    val sizeAndFit: JsonElement? = null,
+    val sizeAndFit: String,
     @SerialName("careInfo")
     val careInfo: String
 )

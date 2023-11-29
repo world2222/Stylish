@@ -4,14 +4,18 @@ import android.annotation.SuppressLint
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.detectTransformGestures
+import androidx.compose.foundation.gestures.rememberTransformableState
+import androidx.compose.foundation.gestures.transformable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
@@ -27,15 +31,29 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImagePainter
 import coil.compose.rememberAsyncImagePainter
+import com.example.stylish.data.remote.dto.detail.Brand
+import com.example.stylish.data.remote.dto.detail.Price
+import com.example.stylish.presentation.detail.component.ExpandableRow
 
 @Composable
 fun DetailScreen(
@@ -45,45 +63,49 @@ fun DetailScreen(
     viewModel.getItemDetail(itemId.toInt())
 
     DetailView(
-        brandName = viewModel.itemDetail.value.brand?.name?: "",
+        brand = viewModel.itemDetail.value.brand,
         imageList = viewModel.itemDetail.value.media?.images?.map { it.url }?: listOf(),
         itemName = viewModel.itemDetail.value.name?: "",
-        curPrice = viewModel.itemDetail.value.price?.current?.text?: "$0.00",
-        prePrice = viewModel.itemDetail.value.price?.previous?.text?: "$0.00",
-        about = viewModel.itemDetail.value.info?.aboutMe?: "",
-        careInfo = viewModel.itemDetail.value.info?.careInfo?: ""
+        price = viewModel.itemDetail.value.price,
+        description = viewModel.itemDetail.value.description?: "",
+        sizeAndFit = viewModel.itemDetail.value.info?.sizeAndFit?: "",
+        lookAfterMe = viewModel.itemDetail.value.info?.careInfo?: "",
+        aboutMe = viewModel.itemDetail.value.info?.aboutMe?: "",
     )
-
 }
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun DetailView(
-    brandName: String,
+    brand: Brand?,
     imageList: List<String>,
     itemName: String,
-    curPrice: String,
-    prePrice: String,
-    about: String,
-    careInfo: String
+    price: Price?,
+    description: String,
+    sizeAndFit: String,
+    lookAfterMe: String,
+    aboutMe: String,
 ) {
     Scaffold(
         topBar = {
             TopAppBar(
                 title = {
                     Text(
-                        text = brandName,
+                        text = brand?.name?: "Error: No brand name",
                         fontSize = 32.sp
                     )
                 }
             )
         }
     ) {
+        val scrollState = rememberScrollState()
+        val height = remember { mutableIntStateOf(0) }
+
         Column(
             modifier = Modifier
                 .padding(it)
-                .verticalScroll(rememberScrollState())
+                .verticalScroll(scrollState)
         ) {
             val pagerState = rememberPagerState(
                 pageCount = { imageList.size }
@@ -98,7 +120,7 @@ fun DetailView(
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .aspectRatio(314f/400f)
+                        .aspectRatio(314f / 400f)
                 ) {
                     Image(
                         painter = image,
@@ -134,7 +156,7 @@ fun DetailView(
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 12.dp, start = 16.dp, end = 16.dp)
+                    .padding(vertical = 16.dp, horizontal = 20.dp)
             ) {
                 Text(
                     text = itemName,
@@ -144,29 +166,63 @@ fun DetailView(
                     )
                 )
                 Row(
-                    modifier = Modifier.padding(top = 16.dp)
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 16.dp),
+                    verticalAlignment = Alignment.Bottom
                 ) {
                     Text(
-                        text = "Price : $curPrice",
+                        text = price?.current?.text?: "$0.00 (Error: No price info)",
                         style = LocalTextStyle.current.copy(
-                            fontSize = 20.sp
+                            fontSize = 22.sp
                         )
                     )
-                    Text(
-                        modifier = Modifier.padding(start = 16.dp, top = 4.dp),
-                        text = "($prePrice)",
-                        style = LocalTextStyle.current.copy(
-                            fontSize = 16.sp
+                    if (price?.current?.text != price?.previous?.text) {
+                        Text(
+                            modifier = Modifier
+                                .padding(start = 12.dp, top = 0.dp),
+                            text = price?.previous?.text?: "$0.00 (Error: No original price info)",
+                            style = LocalTextStyle.current.copy(
+                                fontSize = 16.sp,
+                                color = Color.Gray,
+                                textDecoration = TextDecoration.LineThrough
+                            )
                         )
-                    )
+                    }
                 }
-                Text(text = "About : $about", style = LocalTextStyle.current.copy(
-                    fontSize = 15.sp
-                ))
-                Text(text = "Careful! : $careInfo", style = LocalTextStyle.current.copy(
-                    fontSize = 15.sp
-                ))
             }
+            ExpandableRow(
+                extraInfo = "Product Details",
+                extraInfoDetail = description,
+                scrollState = scrollState,
+                height = height
+            )
+            ExpandableRow(
+                extraInfo = "Brand",
+                extraInfoDetail = brand?.description ?: "",
+                scrollState = scrollState,
+                height = height
+            )
+            ExpandableRow(
+                extraInfo = "Size & Fit",
+                extraInfoDetail = sizeAndFit,
+                scrollState = scrollState,
+                height = height
+            )
+            ExpandableRow(
+                extraInfo = "Look After Me",
+                extraInfoDetail = lookAfterMe,
+                scrollState = scrollState,
+                height = height
+            )
+            ExpandableRow(
+                extraInfo = "About me",
+                extraInfoDetail = aboutMe,
+                scrollState = scrollState,
+                height = height
+            )
+            Spacer(modifier = Modifier.height(6.dp))
         }
     }
 }
+

@@ -59,7 +59,7 @@ data class Data(
     @SerialName("isDeadProduct")
     val isDeadProduct: Boolean? = null,
     @SerialName("rating")
-    val rating: JsonElement? = null,
+    val rating: Rating? = null,
     @SerialName("productType")
     val productType: ProductType? = null,
     @SerialName("plpIds")

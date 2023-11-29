@@ -12,5 +12,5 @@ data class Brand(
     @SerialName("name")
     val name: String,
     @SerialName("description")
-    val description: JsonElement? = null
+    val description: String? = null
 )

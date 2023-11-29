@@ -10,7 +10,7 @@ data class Media(
     @SerialName("images")
     val images: List<Image>,
     @SerialName("catwalk")
-    val catwalk: JsonArray,
+    val catwalk: List<Catwalk>,
     @SerialName("spinset")
     val spinset: JsonArray,
     @SerialName("swatchSprite")
