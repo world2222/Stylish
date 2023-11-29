@@ -139,11 +139,12 @@ fun DetailView(
                 Text(
                     text = itemName,
                     style = LocalTextStyle.current.copy(
-                        fontSize = 25.sp
+                        fontSize = 24.sp,
+                        lineHeight = 32.sp
                     )
                 )
                 Row(
-                    modifier = Modifier.padding(top = 8.dp)
+                    modifier = Modifier.padding(top = 16.dp)
                 ) {
                     Text(
                         text = "Price : $curPrice",
