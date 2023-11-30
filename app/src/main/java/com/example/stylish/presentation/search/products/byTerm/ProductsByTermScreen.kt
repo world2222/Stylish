@@ -20,6 +20,7 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -44,10 +45,15 @@ fun ProductsByTermScreen(
     viewModel: ProductsByTermViewModel = hiltViewModel(),
     navController: NavHostController
 ) {
-    viewModel.getProductByItemTerm(
-        term = term,
-        minPrice = minPrice,
-        maxPrice = maxPrice
+    LaunchedEffect(
+        key1 = term,
+        block = {
+            viewModel.getProductByItemTerm(
+                term = term,
+                minPrice = minPrice,
+                maxPrice = maxPrice
+            )
+        }
     )
 
     val listState = rememberLazyGridState()

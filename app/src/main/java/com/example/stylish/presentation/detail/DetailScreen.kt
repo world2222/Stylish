@@ -31,6 +31,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
@@ -60,8 +61,11 @@ fun DetailScreen(
     itemId: Int,
     viewModel: DetailViewModel = hiltViewModel()
 ) {
-    viewModel.getItemDetail(itemId)
+    LaunchedEffect(itemId) {
+        viewModel.getItemDetail(itemId)
+    }
 
+    Text(text = viewModel.itemDetail.value.id.toString())
     DetailView(
         brand = viewModel.itemDetail.value.brand,
         imageList = viewModel.itemDetail.value.media?.images?.map { it.url }?: listOf(),
@@ -112,15 +116,16 @@ fun DetailView(
             )
 
             HorizontalPager(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .aspectRatio(314f/400f),
                 state = pagerState,
                 beyondBoundsPageCount = imageList.size,
             ) {index ->
                 val image = rememberAsyncImagePainter(model = "https://" + imageList[index])
 
                 Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .aspectRatio(314f / 400f)
+                    modifier = Modifier.fillMaxSize()
                 ) {
                     Image(
                         painter = image,

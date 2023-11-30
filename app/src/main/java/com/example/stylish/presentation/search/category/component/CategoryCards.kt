@@ -21,6 +21,9 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -45,6 +48,15 @@ fun CategoryCards(
 ) {
     val listState = rememberLazyGridState()
 
+    val isLoaded = rememberSaveable { mutableStateOf(false) }
+
+    LaunchedEffect(key1 = gender) {
+        if (!isLoaded.value) {
+            sharedViewModel.getCategoryByGender(gender)
+            isLoaded.value = true
+        }
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -57,12 +69,9 @@ fun CategoryCards(
             state = listState,
             modifier = Modifier
                 .fillMaxSize()
-                .padding(8.dp)
+                .padding(horizontal = 8.dp)
         ) {
-            items(
-                if (gender == "Men") sharedViewModel.categoryMen.value
-                else sharedViewModel.categoryWomen.value
-            ) { item ->
+            items(sharedViewModel.category.value) { item ->
                 Card(
                     modifier = Modifier
                         .fillMaxSize()
@@ -70,7 +79,8 @@ fun CategoryCards(
                         .padding(8.dp)
                         .clip(RoundedCornerShape(10.dp))
                         .clickable {
-                            navController.navigate(SearchDetailScreen.ProductsByIdScreen.route + "/${item.link?.categoryId}") },
+                            navController.navigate(SearchDetailScreen.ProductsByIdScreen.route + "/${item.link?.categoryId}")
+                        },
                 ) {
                     Box(
                         modifier = Modifier
@@ -80,8 +90,10 @@ fun CategoryCards(
                         val image = rememberAsyncImagePainter(model = item.content?.mobileImageUrl)
 
                         if (image.state is AsyncImagePainter.State.Loading) {
-                            CircularProgressIndicator(Modifier
-                                .align(Alignment.Center))
+                            CircularProgressIndicator(
+                                Modifier
+                                    .align(Alignment.Center)
+                            )
                         }
                         Image(
                             modifier = Modifier.fillMaxSize(),
@@ -101,7 +113,7 @@ fun CategoryCards(
                         item.content?.title?.let { title ->
                             Text(
                                 text = title,
-                                style = TextStyle(color = Color.White ,fontSize = 15.sp),
+                                style = TextStyle(color = Color.White, fontSize = 15.sp),
                                 modifier = Modifier.padding(10.dp)
                             )
                         }

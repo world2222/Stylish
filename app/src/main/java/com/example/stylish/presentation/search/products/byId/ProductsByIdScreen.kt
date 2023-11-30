@@ -24,6 +24,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -50,7 +51,10 @@ fun ProductsByIdScreen(
     viewModel: ProductsByIdViewModel = hiltViewModel(),
     navController: NavHostController
 ) {
-    viewModel.getProductByIdList(categoryId)
+    LaunchedEffect(
+        key1 = categoryId,
+        block = { viewModel.getProductByIdList(categoryId) }
+    )
 
     val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
 

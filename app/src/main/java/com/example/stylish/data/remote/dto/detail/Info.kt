@@ -8,9 +8,9 @@ import kotlinx.serialization.json.JsonElement
 @Serializable
 data class Info(
     @SerialName("aboutMe")
-    val aboutMe: String,
+    val aboutMe: String? = null,
     @SerialName("sizeAndFit")
-    val sizeAndFit: String,
+    val sizeAndFit: String? = null,
     @SerialName("careInfo")
-    val careInfo: String
+    val careInfo: String? = null
 )

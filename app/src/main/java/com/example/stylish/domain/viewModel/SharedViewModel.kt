@@ -16,26 +16,18 @@ import javax.inject.Inject
 class SharedViewModel @Inject constructor(
     private val service: AsosRepository
 ) : ViewModel() {
-    private val _category = mutableStateOf(Category())
-    val category: State<Category> = _category
-
-    private val _categoryMen = mutableStateOf<List<Children>>(listOf())
-    val categoryMen: State<List<Children>> = _categoryMen
-
-    private val _categoryWomen = mutableStateOf<List<Children>>(listOf())
-    val categoryWomen: State<List<Children>> = _categoryWomen
+    private val _category = mutableStateOf<List<Children>>(listOf())
+    val category: State<List<Children>> = _category
 
     private val _categoryNameWithId = mutableStateOf<List<CategoryNameWithId>>(listOf())
     val categoryNameWithId: State<List<CategoryNameWithId>> = _categoryNameWithId
 
-    init {
+    fun getCategoryByGender(gender: String) {
+        val gender = if (gender == "Men") 0 else 1
         viewModelScope.launch {
-            _category.value = service.getCategories()
-            _categoryMen.value = category.value.data?.navigation?.get(0)?.children?.get(4)?.children?.find { it.content?.title == "Clothing" }?.children?.get(1)?.children
+            _category.value = service.getCategories().data?.navigation?.get(gender)?.children?.get(4)?.children?.find { it.content?.title == "Clothing" }?.children?.get(1)?.children
                 ?: listOf()
-            _categoryWomen.value = category.value.data?.navigation?.get(1)?.children?.get(4)?.children?.find { it.content?.title == "Clothing" }?.children?.get(1)?.children
-                ?: listOf()
-            _categoryNameWithId.value = categoryWomen.value.map { CategoryNameWithId(name = it.content?.title, id = it.link?.categoryId) }
+            _categoryNameWithId.value = category.value.map { CategoryNameWithId(name = it.content?.title, id = it.link?.categoryId) }
         }
     }
 }

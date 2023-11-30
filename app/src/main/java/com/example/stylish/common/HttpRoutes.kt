@@ -6,7 +6,7 @@ object HttpRoutes {
     const val CATEGORY = "$BASE_URL/getCategories"
 
     const val PRODUCT_LIST_ID_START = "$BASE_URL/getProductList?categoryId="
-    const val PRODUCT_LIST_ID_END = "&currency=USD&country=US&store=US&languageShort=en&sizeSchema=US&limit=10000&offset=0"
+    const val PRODUCT_LIST_ID_END = "&currency=USD&country=US&store=US&languageShort=en&sizeSchema=US&limit=200&offset=0"
 
     const val PRODUCT_LIST_TERM_START = "$BASE_URL/getProductListBySearchTerm?searchTerm="
     const val PRODUCT_LIST_TERM_MIDDLE = "&currency=USD&country=US&store=US&languageShort=en&sizeSchema=US&limit=200&offset=1&priceMin="

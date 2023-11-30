@@ -65,4 +65,5 @@ sealed class SearchDetailScreen(val route: String) {
     data object SearchMainScreen : SearchDetailScreen(route = "SearchMainScreen")
     data object SearchCategoryScreen : SearchDetailScreen(route = "SearchCategoryScreen")
     data object ProductsByIdScreen : SearchDetailScreen(route = "ProductsByIdScreen")
+    data object ProductsByTermScreen: SearchDetailScreen(route = "ProductsByTermScreen")
 }
