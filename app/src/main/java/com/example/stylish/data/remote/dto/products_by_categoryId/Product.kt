@@ -1,4 +1,4 @@
-package com.example.stylish.data.remote.dto.products
+package com.example.stylish.data.remote.dto.products_by_categoryId
 
 
 import kotlinx.serialization.SerialName
@@ -24,7 +24,7 @@ data class Product(
     @SerialName("hasMultiplePrices")
     val hasMultiplePrices: Boolean,
     @SerialName("groupId")
-    val groupId: JsonElement? = null,
+    val groupId: Int? = null,
     @SerialName("productCode")
     val productCode: Int,
     @SerialName("productType")
@@ -36,7 +36,7 @@ data class Product(
     @SerialName("additionalImageUrls")
     val additionalImageUrls: List<String>,
     @SerialName("videoUrl")
-    val videoUrl: JsonElement? = null,
+    val videoUrl: String? = null,
     @SerialName("showVideo")
     val showVideo: Boolean,
     @SerialName("isSellingFast")

@@ -2,16 +2,12 @@ package com.example.stylish.domain.viewModel
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.stylish.data.remote.dto.category.Category
 import com.example.stylish.data.remote.dto.category.Children
-import com.example.stylish.data.remote.dto.products.Product
-import com.example.stylish.data.remote.dto.products.Products
 import com.example.stylish.domain.model.CategoryNameWithId
 import com.example.stylish.domain.repository.AsosRepository
-import com.example.stylish.presentation.home.HomeViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

@@ -1,13 +1,14 @@
-package com.example.stylish.data.remote.dto.products
+package com.example.stylish.data.remote.dto.products_by_categoryId
 
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.JsonElement
 
 @Serializable
-data class Previous(
+data class Rrp(
     @SerialName("value")
-    val value: Float? = null,
+    val value: JsonElement? = null,
     @SerialName("text")
     val text: String
 )

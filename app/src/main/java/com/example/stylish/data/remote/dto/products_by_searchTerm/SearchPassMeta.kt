@@ -1,4 +1,4 @@
-package com.example.stylish.data.remote.dto.products
+package com.example.stylish.data.remote.dto.products_by_searchTerm
 
 
 import kotlinx.serialization.SerialName
@@ -12,7 +12,7 @@ data class SearchPassMeta(
     @SerialName("isSpellcheck")
     val isSpellcheck: Boolean,
     @SerialName("searchPass")
-    val searchPass: JsonArray,
+    val searchPass: List<SearchPass>,
     @SerialName("alternateSearchTerms")
     val alternateSearchTerms: JsonArray
 )

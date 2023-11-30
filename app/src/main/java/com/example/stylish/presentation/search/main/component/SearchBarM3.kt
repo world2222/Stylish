@@ -38,15 +38,15 @@ fun SearchBarM3(
     dbViewModel: HistoryViewModel = hiltViewModel()
 ) {
     SearchBar(
-        query = viewModel.getQuery(),
+        query = viewModel.query.value,
         onQueryChange = { viewModel.setQuery(it) },
         onSearch = {
             dbViewModel.addHistory(
-                history = History(viewModel.getQuery())
+                history = History(viewModel.query.value)
             )
             viewModel.toggleActive()
         },
-        active = viewModel.isActive(),
+        active = viewModel.active.value,
         onActiveChange = {
             viewModel.toggleActive()
         },
@@ -57,7 +57,7 @@ fun SearchBarM3(
         trailingIcon = {
             if (viewModel.isActive()) {
                 IconButton(onClick = {
-                    if (viewModel.getQuery().isNotEmpty())
+                    if (viewModel.query.value.isNotEmpty())
                         viewModel.setQuery("")
                     else
                         viewModel.toggleActive()

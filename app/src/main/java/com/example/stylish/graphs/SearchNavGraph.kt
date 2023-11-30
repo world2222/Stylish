@@ -10,7 +10,7 @@ import androidx.navigation.navigation
 import com.example.stylish.presentation.detail.DetailScreen
 import com.example.stylish.presentation.search.category.SearchCategoryScreen
 import com.example.stylish.presentation.search.main.SearchMainScreen
-import com.example.stylish.presentation.search.products.ProductsScreen
+import com.example.stylish.presentation.search.products.byId.ProductsByIdScreen
 
 fun NavGraphBuilder.searchNavGraph(
     navController: NavHostController,
@@ -39,11 +39,11 @@ fun NavGraphBuilder.searchNavGraph(
             }
         }
         composable(
-            route = SearchDetailScreen.ProductsScreen.route + "/{categoryId}",
-            arguments = listOf(navArgument("categoryId") { type = NavType.StringType })
+            route = SearchDetailScreen.ProductsByIdScreen.route + "/{categoryId}",
+            arguments = listOf(navArgument("categoryId") { type = NavType.IntType })
         ) { backStackEntry ->
-            backStackEntry.arguments?.getString("categoryId")?.let {
-                ProductsScreen(
+            backStackEntry.arguments?.getInt("categoryId")?.let {
+                ProductsByIdScreen(
                     navController = navController,
                     paddingValues = paddingValues,
                     categoryId = it
@@ -52,9 +52,9 @@ fun NavGraphBuilder.searchNavGraph(
         }
         composable(
             route = RootGraph.ItemDetailScreen.route + "/{itemId}",
-            arguments = listOf(navArgument("itemId") { type = NavType.StringType })
+            arguments = listOf(navArgument("itemId") { type = NavType.IntType })
         ) { backStackEntry ->
-            backStackEntry.arguments?.getString("itemId")?.let {
+            backStackEntry.arguments?.getInt("itemId")?.let {
                 DetailScreen(itemId = it)
             }
         }
@@ -64,5 +64,5 @@ fun NavGraphBuilder.searchNavGraph(
 sealed class SearchDetailScreen(val route: String) {
     data object SearchMainScreen : SearchDetailScreen(route = "SearchMainScreen")
     data object SearchCategoryScreen : SearchDetailScreen(route = "SearchCategoryScreen")
-    data object ProductsScreen : SearchDetailScreen(route = "ProductsScreen")
+    data object ProductsByIdScreen : SearchDetailScreen(route = "ProductsByIdScreen")
 }

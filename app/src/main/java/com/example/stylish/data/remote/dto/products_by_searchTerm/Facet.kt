@@ -1,4 +1,4 @@
-package com.example.stylish.data.remote.dto.products
+package com.example.stylish.data.remote.dto.products_by_searchTerm
 
 
 import kotlinx.serialization.SerialName
@@ -13,7 +13,7 @@ data class Facet(
     @SerialName("facetValues")
     val facetValues: List<FacetValue>,
     @SerialName("displayStyle")
-    val displayStyle: String? = "",
+    val displayStyle: String,
     @SerialName("facetType")
     val facetType: String,
     @SerialName("hasSelectedValues")

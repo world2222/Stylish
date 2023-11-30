@@ -26,9 +26,9 @@ fun NavGraphBuilder.homeNavGraph(
         }
         composable(
             route = RootGraph.ItemDetailScreen.route + "/{itemId}",
-            arguments = listOf(navArgument("itemId") { type = NavType.StringType })
+            arguments = listOf(navArgument("itemId") { type = NavType.IntType })
         ) { backStackEntry ->
-            backStackEntry.arguments?.getString("itemId")?.let {
+            backStackEntry.arguments?.getInt("itemId")?.let {
                 DetailScreen(itemId = it)
             }
         }

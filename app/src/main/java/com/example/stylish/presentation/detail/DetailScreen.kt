@@ -57,10 +57,10 @@ import com.example.stylish.presentation.detail.component.ExpandableRow
 
 @Composable
 fun DetailScreen(
-    itemId: String,
+    itemId: Int,
     viewModel: DetailViewModel = hiltViewModel()
 ) {
-    viewModel.getItemDetail(itemId.toInt())
+    viewModel.getItemDetail(itemId)
 
     DetailView(
         brand = viewModel.itemDetail.value.brand,

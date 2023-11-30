@@ -1,4 +1,4 @@
-package com.example.stylish.data.remote.dto.products
+package com.example.stylish.data.remote.dto.products_by_searchTerm
 
 
 import kotlinx.serialization.SerialName
