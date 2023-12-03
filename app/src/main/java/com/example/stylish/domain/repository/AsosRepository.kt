@@ -4,6 +4,7 @@ import com.example.stylish.data.remote.dto.category.Category
 import com.example.stylish.data.remote.dto.detail.Detail
 import com.example.stylish.data.remote.dto.products_by_categoryId.ProductsByCategoryId
 import com.example.stylish.data.remote.dto.products_by_searchTerm.ProductsBySearchTerm
+import com.example.stylish.data.remote.dto.you_might_also_like.YouMightAlsoLike
 
 interface AsosRepository {
     suspend fun getCategories(): Category
@@ -17,4 +18,6 @@ interface AsosRepository {
     ): ProductsBySearchTerm
 
     suspend fun getItemDetailById(id: Int): Detail
+
+    suspend fun getYouMightAlsoLike(id: Int): YouMightAlsoLike
 }

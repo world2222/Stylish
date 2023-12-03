@@ -14,4 +14,7 @@ object HttpRoutes {
 
     const val PRODUCT_DETAIL_START = "$BASE_URL/getProductDetails?productId="
     const val PRODUCT_DETAIL_END = "&currency=USD&store=US&language=en-US&sizeSchema=US"
+
+    const val YOU_MIGHT_ALSO_LIKE_START = "$BASE_URL/getYouMightAlsoLike?productId="
+    const val YOU_MIGHT_ALSO_LIKE_END = "&currency=USD&country=US&store=US&language=en-US"
 }

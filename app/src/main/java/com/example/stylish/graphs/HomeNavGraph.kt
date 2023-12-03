@@ -29,7 +29,7 @@ fun NavGraphBuilder.homeNavGraph(
             arguments = listOf(navArgument("itemId") { type = NavType.IntType })
         ) { backStackEntry ->
             backStackEntry.arguments?.getInt("itemId")?.let {
-                DetailScreen(itemId = it)
+                DetailScreen(itemId = it, navController = navController)
             }
         }
     }

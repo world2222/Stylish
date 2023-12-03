@@ -55,7 +55,10 @@ fun NavGraphBuilder.searchNavGraph(
             arguments = listOf(navArgument("itemId") { type = NavType.IntType })
         ) { backStackEntry ->
             backStackEntry.arguments?.getInt("itemId")?.let {
-                DetailScreen(itemId = it)
+                DetailScreen(
+                    itemId = it,
+                    navController = navController
+                )
             }
         }
     }
@@ -65,5 +68,4 @@ sealed class SearchDetailScreen(val route: String) {
     data object SearchMainScreen : SearchDetailScreen(route = "SearchMainScreen")
     data object SearchCategoryScreen : SearchDetailScreen(route = "SearchCategoryScreen")
     data object ProductsByIdScreen : SearchDetailScreen(route = "ProductsByIdScreen")
-    data object ProductsByTermScreen: SearchDetailScreen(route = "ProductsByTermScreen")
 }
