@@ -1,28 +1,28 @@
 package com.example.stylish.presentation.home
 
-import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.material3.LocalTextStyle
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontStyle
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.example.stylish.presentation.home.component.ItemInfo
+import androidx.navigation.NavHostController
+import com.example.stylish.presentation.home.component.ItemInfoScreen
 import com.example.stylish.ui.theme.DancingScript
 
-@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
+    navController: NavHostController,
     paddingValues: PaddingValues,
     viewModel: HomeViewModel = hiltViewModel()
 ) {
@@ -31,16 +31,15 @@ fun HomeScreen(
             .fillMaxSize()
             .padding(paddingValues),
         topBar = {
-            Text(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(start = 10.dp, bottom = 8.dp),
-                text = "Stylish",
-                style = LocalTextStyle.current.copy(
-                    fontFamily = DancingScript,
-                    fontSize = 35.sp,
-                    fontStyle = FontStyle.Italic,
-                )
+            TopAppBar(
+                title = {
+                    Text(
+                        text = "Stylish",
+                        fontFamily = DancingScript,
+                        fontSize = 35.sp,
+                        fontStyle = FontStyle.Italic,
+                    )
+                }
             )
         }
     ) { topPadding ->
@@ -54,8 +53,10 @@ fun HomeScreen(
             state = listState
         ) {
             items(viewModel.newIn.value) {
-                ItemInfo(
+                ItemInfoScreen(
+                    navController = navController,
                     brandName = it.brandName,
+                    itemId = it.id,
                     itemName = it.name,
                     imageUrl = "https://${it.imageUrl}",
                     price = it.price.current.text

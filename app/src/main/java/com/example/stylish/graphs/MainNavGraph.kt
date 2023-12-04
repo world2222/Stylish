@@ -8,7 +8,6 @@ import androidx.navigation.compose.composable
 import com.example.stylish.presentation.create.CreateScreen
 import com.example.stylish.presentation.home.HomeScreen
 import com.example.stylish.presentation.mypage.MyPageScreen
-import com.example.stylish.presentation.search.SearchScreen
 
 @Composable
 fun MainNavGraph(
@@ -20,15 +19,17 @@ fun MainNavGraph(
         route = RootGraph.MainScreen.route,
         startDestination = MainGraph.HomeScreen.route
     ) {
-        composable(route = MainGraph.HomeScreen.route) {
-            HomeScreen(paddingValues = paddingValues)
-        }
+        homeNavGraph(
+            navController = navController,
+            paddingValues = paddingValues
+        )
         composable(route = MainGraph.CreateScreen.route) {
             CreateScreen(paddingValues = paddingValues)
         }
-        composable(route = MainGraph.SearchScreen.route) {
-            SearchScreen(paddingValues = paddingValues)
-        }
+        searchNavGraph(
+            navController = navController,
+            paddingValues = paddingValues
+        )
         composable(route = MainGraph.MyPageScreen.route) {
             MyPageScreen(paddingValues = paddingValues)
         }

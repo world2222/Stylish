@@ -1,5 +1,9 @@
 package com.example.stylish.di
 
+import android.content.Context
+import com.example.stylish.data.local.HistoryDao
+import com.example.stylish.data.local.HistoryDatabase
+import com.example.stylish.data.local.HistoryRepository
 import com.example.stylish.data.remote.dto.AsosApiService
 import com.example.stylish.data.remote.dto.AsosApiServiceImpl
 import com.example.stylish.domain.repository.AsosRepository
@@ -7,6 +11,7 @@ import com.example.stylish.data.remote.repository.AsosRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.android.Android
@@ -35,7 +40,7 @@ object AppModule {
             // Must delete before push!!!
             // -------------------------------------------------------------------------------------
             install(DefaultRequest) {
-                header("X-RapidAPI-Key", "")
+                header("X-RapidAPI-Key", "8b4a83a0a4msh2efcbf9b25c23ccp11840cjsnbcfeeb83ac01")
                 header("X-RapidAPI-Host", "asos10.p.rapidapi.com")
             }
             // -------------------------------------------------------------------------------------
@@ -54,5 +59,26 @@ object AppModule {
     @Singleton
     fun provideAsosRepository(api: AsosApiService): AsosRepository {
         return AsosRepositoryImpl(api)
+    }
+
+
+
+    // Room Database
+    @Provides
+    @Singleton
+    fun provideHistoryDataBase(@ApplicationContext context: Context): HistoryDatabase {
+        return HistoryDatabase.getHistoryDatabase(context)
+    }
+
+    @Provides
+    @Singleton
+    fun provideHistoryDao(db: HistoryDatabase): HistoryDao {
+        return db.historyDao()
+    }
+
+    @Provides
+    @Singleton
+    fun provideHistoryRepository(dao: HistoryDao): HistoryRepository {
+        return HistoryRepository(dao)
     }
 }

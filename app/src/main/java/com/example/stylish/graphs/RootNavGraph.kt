@@ -22,4 +22,5 @@ fun RootNavGraph(navController: NavHostController) {
 sealed class RootGraph(val route: String) {
     data object LoginScreen: RootGraph(route = "LoginScreen")
     data object MainScreen: RootGraph(route = "MainScreen")
+    data object ItemDetailScreen: RootGraph(route = "ItemDetailScreen")
 }
