@@ -18,11 +18,13 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Divider
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -43,7 +45,7 @@ import com.example.stylish.data.remote.dto.detail.Data
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun DetailView(
-    scrollState: ScrollState,
+    scrollState: LazyListState,
     data: Data
 ) {
 
@@ -117,7 +119,7 @@ fun DetailView(
             verticalAlignment = Alignment.Bottom
         ) {
             Text(
-                text = price?.current?.text?: "$0.00 (Error: No price info)",
+                text = price?.current?.text?: "$0.00",
                 style = LocalTextStyle.current.copy(
                     fontSize = 22.sp
                 )
@@ -126,7 +128,7 @@ fun DetailView(
                 Text(
                     modifier = Modifier
                         .padding(start = 12.dp, top = 0.dp),
-                    text = price?.previous?.text?: "$0.00 (Error: No original price info)",
+                    text = price?.previous?.text?: "$0.00",
                     style = LocalTextStyle.current.copy(
                         fontSize = 16.sp,
                         color = Color.Gray,
@@ -166,6 +168,5 @@ fun DetailView(
         scrollState = scrollState,
         height = height
     )
-    Spacer(modifier = Modifier.height(6.dp))
 }
 

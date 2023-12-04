@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -60,29 +61,30 @@ fun DetailScreen(
             TopAppBar(
                 title = {
                     Text(
-                        text = viewModel.itemDetail.value.brand?.name?: "Error: No brand name",
+                        text = viewModel.itemDetail.value.brand?.name?: "",
                         fontSize = 32.sp
                     )
                 }
             )
         }
     ) {
-        val scrollState = rememberScrollState()
+        val scrollState = rememberLazyListState()
         val data = viewModel.youMightAlsoLike.value
 
-        Column(
-            modifier = Modifier
-                .padding(it)
-                .verticalScroll(scrollState)
+        LazyColumn(
+            modifier = Modifier.padding(it),
+            state = scrollState
         ) {
-            DetailView(
-                scrollState = scrollState,
-                data = viewModel.itemDetail.value,
-            )
+            item {
+                DetailView(
+                    scrollState = scrollState,
+                    data = viewModel.itemDetail.value,
+                )
+                YouMightAlsoLikeRow(
+                    navController = navController,
+                    data = viewModel.youMightAlsoLike.value
+                )
+            }
         }
-        YouMightAlsoLikeRow(
-            navController = navController,
-            data = viewModel.youMightAlsoLike.value
-        )
     }
 }

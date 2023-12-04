@@ -4,18 +4,21 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Divider
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -26,7 +29,9 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -40,19 +45,28 @@ fun YouMightAlsoLikeRow(
     data: List<DataYouMightAlsoLike>,
     navController: NavController
 ) {
-
-    println(data)
     val lazyRowState = rememberLazyListState()
+    Divider(modifier = Modifier.padding(horizontal = 20.dp))
+    Spacer(modifier = Modifier.height(32.dp))
+    Text(
+        modifier = Modifier.padding(vertical = 16.dp, horizontal = 20.dp),
+        text = "You might also like",
+        fontSize = 20.sp,
+        fontWeight = FontWeight.Bold,
+        maxLines = 1,
+        overflow = TextOverflow.Ellipsis
+    )
     LazyRow(
         modifier = Modifier
-            .fillMaxSize(),
+            .fillMaxWidth()
+            .padding(horizontal = 8.dp),
         state = lazyRowState,
         verticalAlignment = Alignment.CenterVertically
     ) {
         items(data) { item ->
             Card(
                 modifier = Modifier
-                    .fillMaxSize()
+                    .height(200.dp)
                     .aspectRatio(320 / 400f)
                     .padding(8.dp)
                     .clip(RoundedCornerShape(10.dp))
@@ -113,4 +127,5 @@ fun YouMightAlsoLikeRow(
             }
         }
     }
+    Spacer(modifier = Modifier.height(16.dp))
 }

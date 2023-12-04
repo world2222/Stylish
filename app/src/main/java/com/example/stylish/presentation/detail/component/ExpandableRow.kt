@@ -6,12 +6,14 @@ import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.animateScrollBy
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -45,7 +47,7 @@ import androidx.compose.ui.unit.sp
 fun ExpandableRow(
     extraInfo: String,
     extraInfoDetail: String,
-    scrollState: ScrollState,
+    scrollState: LazyListState,
     height: MutableIntState
 ) {
     var expandedState by remember{ mutableStateOf(false) }
@@ -105,8 +107,8 @@ fun ExpandableRow(
 
             LaunchedEffect(expandedState) {
                 if (expandedState) {
-                    scrollState.animateScrollTo(
-                        scrollState.value + height.intValue,
+                    scrollState.animateScrollBy(
+                        value = height.intValue.toFloat(),
                         animationSpec = tween(durationMillis = 300)
                     )
                 }

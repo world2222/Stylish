@@ -40,7 +40,7 @@ object AppModule {
             // Must delete before push!!!
             // -------------------------------------------------------------------------------------
             install(DefaultRequest) {
-                header("X-RapidAPI-Key", "")
+                header("X-RapidAPI-Key", "8b4a83a0a4msh2efcbf9b25c23ccp11840cjsnbcfeeb83ac01")
                 header("X-RapidAPI-Host", "asos10.p.rapidapi.com")
             }
             // -------------------------------------------------------------------------------------
