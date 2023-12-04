@@ -1,14 +1,10 @@
 package com.example.stylish.data.local.viewModel
 
-import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.example.stylish.data.local.History
-import com.example.stylish.data.local.HistoryRepository
+import com.example.stylish.data.local.historyDatabase.History
+import com.example.stylish.data.local.historyDatabase.HistoryRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel

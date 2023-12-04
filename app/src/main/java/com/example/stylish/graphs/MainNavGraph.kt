@@ -31,7 +31,10 @@ fun MainNavGraph(
             paddingValues = paddingValues
         )
         composable(route = MainGraph.MyPageScreen.route) {
-            MyPageScreen(paddingValues = paddingValues)
+            MyPageScreen(
+                navController = navController,
+                paddingValues = paddingValues
+            )
         }
     }
 }
