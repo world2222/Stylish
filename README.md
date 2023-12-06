@@ -1,9 +1,12 @@
 # Stylish
 
-### *Sick of changing clothes until you find the best look?*
+### *Wanna get latest & popular fashion trends?*
+### *Sick of trying all the clothes to find best color match?*
 ### - *Try 'Stylish'.*
 <img src="https://github.com/world2222/Stylish/assets/52661837/cf9e499b-d0c5-4931-9f76-8c1f1631a948)" width="250px">
 
+<br>
+<br>
 <br>
 <br>
 
@@ -13,6 +16,23 @@
 ### Not just like a shopping app, but more like a fashion magazine.
 * Focusing on the look, not the price.
 * Update the fashion items following the latest and popular trends.
+
+<br>
+
+# Explore deeper
+![item detail](https://github.com/world2222/Stylish/assets/52661837/4de4cf97-9f35-4533-a27d-9400c7c90333)
+
+### Check details, search deeper and wider.
+By clicking each fashion item, users can check...
+* Brand name
+* Additional images
+* Item name
+* Price (current & original)
+* Product details
+* About the Brand
+* Model's size & fit
+* Precautions
+* Textures
 
 <br>
 
