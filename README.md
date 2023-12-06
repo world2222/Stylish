@@ -1,7 +1,7 @@
 # Stylish
 
 ### *Wanna get latest & popular fashion trends?*
-### *Sick of trying all the clothes to find best color match?*
+### *Sick of trying all the clothes on to find the best color match?*
 ### - *Try 'Stylish'.*
 <img src="https://github.com/world2222/Stylish/assets/52661837/cf9e499b-d0c5-4931-9f76-8c1f1631a948)" width="250px">
 
