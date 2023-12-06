@@ -5,10 +5,13 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -35,11 +38,13 @@ import androidx.navigation.NavHostController
 import coil.compose.AsyncImagePainter
 import coil.compose.rememberAsyncImagePainter
 import com.example.stylish.graphs.RootGraph
+import com.example.stylish.presentation.search.main.component.SearchBarM3
 
 @Composable
 fun ProductsByTermScreen(
     paddingValues: PaddingValues,
     term: String,
+    sortType: String,
     minPrice: String,
     maxPrice: String,
     viewModel: ProductsByTermViewModel = hiltViewModel(),
@@ -50,6 +55,7 @@ fun ProductsByTermScreen(
         block = {
             viewModel.getProductByItemTerm(
                 term = term,
+                sortType = sortType,
                 minPrice = minPrice,
                 maxPrice = maxPrice
             )
@@ -63,7 +69,7 @@ fun ProductsByTermScreen(
         state = listState,
         modifier = Modifier
             .fillMaxSize()
-            .padding(top = paddingValues.calculateTopPadding(), start = 8.dp, end = 8.dp)
+            .padding(top = paddingValues.calculateTopPadding() + 8.dp, start = 8.dp, end = 8.dp)
     ) {
         items(viewModel.productList.value) { item ->
             Card(

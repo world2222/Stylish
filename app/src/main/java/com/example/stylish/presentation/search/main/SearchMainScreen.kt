@@ -1,6 +1,7 @@
 package com.example.stylish.presentation.search.main
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
@@ -10,10 +11,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.example.stylish.presentation.search.main.component.BeforeSearchScreen
+import com.example.stylish.presentation.search.main.component.Conditions
 import com.example.stylish.presentation.search.main.component.SearchBarM3
 import com.example.stylish.presentation.search.products.byTerm.ProductsByTermScreen
 
@@ -31,15 +34,16 @@ fun SearchMainScreen(
             .padding(paddingValues),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        Spacer(modifier = Modifier.height(8.dp))
+
         SearchBarM3()
 
         if (!viewModel.isActive() && viewModel.getQuery().isNotEmpty()) {
             ProductsByTermScreen(
                 paddingValues = paddingValues,
                 term = viewModel.getQuery(),
-                minPrice = "0",
-                maxPrice = "0",
+                sortType = viewModel.sortType.value,
+                minPrice = viewModel.minPrice.value,
+                maxPrice = viewModel.maxPrice.value,
                 navController = navController
             )
         } else {
@@ -47,4 +51,3 @@ fun SearchMainScreen(
         }
     }
 }
-

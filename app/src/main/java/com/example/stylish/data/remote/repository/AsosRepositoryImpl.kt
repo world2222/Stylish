@@ -21,13 +21,15 @@ class AsosRepositoryImpl @Inject constructor(
 
     override suspend fun getProductsBySearchTerm(
         term: String,
+        sortType: String,
         minPrice: String,
         maxPrice: String
     ): ProductsBySearchTerm {
         return api.getProductsBySearchTerm(
             term = term,
             minPrice = minPrice,
-            maxPrice = maxPrice
+            maxPrice = maxPrice,
+            sortType = sortType
         )
     }
 

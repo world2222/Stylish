@@ -1,4 +1,4 @@
-package com.example.stylish.presentation.mypage
+package com.example.stylish.presentation.wishlist
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
@@ -8,12 +8,10 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -52,7 +50,7 @@ import com.example.stylish.ui.theme.DancingScript
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun MyPageScreen(
+fun WishListScreen(
     paddingValues: PaddingValues,
     navController: NavController,
     viewModel: WishlistViewModel = hiltViewModel()
@@ -132,7 +130,13 @@ fun MyPageScreen(
                                 contentAlignment = Alignment.BottomStart
                             ) {
                                 val image =
-                                    rememberAsyncImagePainter(model = "https://${item.imageUrl}")
+                                    rememberAsyncImagePainter(
+                                        model = if (item.imageUrl.contains("https://")) {
+                                            item.imageUrl
+                                        } else {
+                                            "https://${item.imageUrl}"
+                                        }
+                                    )
 
                                 if (image.state is AsyncImagePainter.State.Loading) {
                                     CircularProgressIndicator(

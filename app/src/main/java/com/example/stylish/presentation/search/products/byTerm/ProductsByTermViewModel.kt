@@ -24,12 +24,14 @@ class ProductsByTermViewModel @Inject constructor(
 
     fun getProductByItemTerm(
         term: String,
+        sortType: String,
         minPrice: String,
         maxPrice: String
     ) {
         viewModelScope.launch {
             _data.value = service.getProductsBySearchTerm(
                 term = term,
+                sortType = sortType,
                 minPrice = minPrice,
                 maxPrice = maxPrice
             )     // 2623 is the id of the "New in" category.
