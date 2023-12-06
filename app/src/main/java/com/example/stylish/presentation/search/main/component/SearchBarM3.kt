@@ -11,6 +11,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.History
 import androidx.compose.material.icons.filled.Search
@@ -63,14 +64,25 @@ fun SearchBarM3(
         trailingIcon = {
             if (viewModel.isActive()) {
                 IconButton(onClick = {
-                    if (viewModel.query.value.isNotEmpty())
-                        viewModel.setQuery("")
-                    else
+                    if (viewModel.query.value.isEmpty())
                         viewModel.toggleActive()
+                    else
+                        viewModel.setQuery("")
                 }) {
                     Icon(
                         imageVector = Icons.Default.Close,
                         contentDescription = "Close"
+                    )
+                }
+            }
+
+            if (!viewModel.isActive() && viewModel.query.value.isNotEmpty()) {
+                IconButton(onClick = {
+                    viewModel.setQuery("")
+                }) {
+                    Icon(
+                        imageVector = Icons.Default.ArrowBack,
+                        contentDescription = "Back to men and women"
                     )
                 }
             }

@@ -37,7 +37,9 @@ fun SearchMainScreen(
 
         SearchBarM3()
 
-        if (!viewModel.isActive() && viewModel.getQuery().isNotEmpty()) {
+        if (viewModel.getQuery().isEmpty()) {
+            BeforeSearchScreen(paddingValues = paddingValues, navController = navController)
+        } else {
             ProductsByTermScreen(
                 paddingValues = paddingValues,
                 term = viewModel.getQuery(),
@@ -46,8 +48,6 @@ fun SearchMainScreen(
                 maxPrice = viewModel.maxPrice.value,
                 navController = navController
             )
-        } else {
-            BeforeSearchScreen(paddingValues = paddingValues, navController = navController)
         }
     }
 }
