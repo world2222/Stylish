@@ -13,6 +13,7 @@ interface AsosRepository {
 
     suspend fun getProductsBySearchTerm(
         term: String,
+        sortType: String,
         minPrice: String,
         maxPrice: String
     ): ProductsBySearchTerm

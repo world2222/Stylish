@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class Diagnostics(
     @SerialName("requestId")
-    val requestId: String,
+    val requestId: String? = null,
     @SerialName("processingTime")
     val processingTime: Int,
     @SerialName("queryTime")

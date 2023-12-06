@@ -11,6 +11,7 @@ interface AsosApiService {
     suspend fun getProductsByCategoryId(id: Int): com.example.stylish.data.remote.dto.products_by_categoryId.ProductsByCategoryId
     suspend fun getProductsBySearchTerm(
         term: String,
+        sortType: String,
         minPrice: String,
         maxPrice: String
     ): ProductsBySearchTerm

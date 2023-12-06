@@ -1,6 +1,7 @@
 package com.example.stylish.presentation.search.main.component
 
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.background
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -8,7 +9,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.History
 import androidx.compose.material.icons.filled.Search
@@ -27,6 +30,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.stylish.data.local.historyDatabase.History
@@ -59,14 +64,25 @@ fun SearchBarM3(
         trailingIcon = {
             if (viewModel.isActive()) {
                 IconButton(onClick = {
-                    if (viewModel.query.value.isNotEmpty())
-                        viewModel.setQuery("")
-                    else
+                    if (viewModel.query.value.isEmpty())
                         viewModel.toggleActive()
+                    else
+                        viewModel.setQuery("")
                 }) {
                     Icon(
                         imageVector = Icons.Default.Close,
                         contentDescription = "Close"
+                    )
+                }
+            }
+
+            if (!viewModel.isActive() && viewModel.query.value.isNotEmpty()) {
+                IconButton(onClick = {
+                    viewModel.setQuery("")
+                }) {
+                    Icon(
+                        imageVector = Icons.Default.ArrowBack,
+                        contentDescription = "Back to men and women"
                     )
                 }
             }
@@ -85,6 +101,8 @@ fun SearchBarM3(
                 listState.animateScrollToItem(histories.size - 1)
             }
         }
+
+        Conditions()
 
         LazyColumn(
             modifier = Modifier.fillMaxWidth(),

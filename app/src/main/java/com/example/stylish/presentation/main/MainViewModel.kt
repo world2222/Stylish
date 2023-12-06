@@ -42,7 +42,7 @@ class MainViewModel @Inject constructor(
             route = MainGraph.SearchScreen.route
         ),
         BottomNavigationItem(
-            title = "My Page",
+            title = "Wish List",
             selectedIcon = Icons.Filled.Person,
             unselectedIcon = Icons.Outlined.Person,
             route = MainGraph.MyPageScreen.route

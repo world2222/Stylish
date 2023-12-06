@@ -22,10 +22,22 @@ class SharedViewModel @Inject constructor(
     private val _categoryNameWithId = mutableStateOf<List<CategoryNameWithId>>(listOf())
     val categoryNameWithId: State<List<CategoryNameWithId>> = _categoryNameWithId
 
-    fun getCategoryByGender(gender: String) {
-        val gender = if (gender == "Men") 0 else 1
+    private val _menWomenImage = mutableStateOf<List<String>>(listOf())
+    val menWomenImage: State<List<String>> = _menWomenImage
+
+    fun getMenWomenImage() {
         viewModelScope.launch {
-            _category.value = service.getCategories().data?.navigation?.get(gender)?.children?.get(4)?.children?.find { it.content?.title == "Clothing" }?.children?.get(1)?.children
+            _menWomenImage.value = service.getCategories().data?.navigation?.map {
+                it.children?.get(4)?.children?.find { it2 ->
+                    it2.content?.title == "Clothing"
+                }?.content?.mobileImageUrl.toString()
+            }?: listOf()
+        }
+    }
+
+    fun getCategoryByGender(gender: String) {
+        viewModelScope.launch {
+            _category.value = service.getCategories().data?.navigation?.get(if (gender == "Men") 0 else 1)?.children?.get(4)?.children?.find { it.content?.title == "Clothing" }?.children?.get(1)?.children
                 ?: listOf()
             _categoryNameWithId.value = category.value.map { CategoryNameWithId(name = it.content?.title, id = it.link?.categoryId) }
         }

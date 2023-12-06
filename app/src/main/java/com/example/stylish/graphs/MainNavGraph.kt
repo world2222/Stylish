@@ -6,8 +6,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.stylish.presentation.create.CreateScreen
-import com.example.stylish.presentation.home.HomeScreen
-import com.example.stylish.presentation.mypage.MyPageScreen
+import com.example.stylish.presentation.wishlist.WishListScreen
 
 @Composable
 fun MainNavGraph(
@@ -31,7 +30,7 @@ fun MainNavGraph(
             paddingValues = paddingValues
         )
         composable(route = MainGraph.MyPageScreen.route) {
-            MyPageScreen(
+            WishListScreen(
                 navController = navController,
                 paddingValues = paddingValues
             )
