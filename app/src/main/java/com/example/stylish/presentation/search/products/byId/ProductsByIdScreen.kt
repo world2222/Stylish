@@ -107,7 +107,7 @@ fun ProductsByIdScreen(
                             contentAlignment = Alignment.BottomStart
                         ) {
                             val image =
-                                rememberAsyncImagePainter(model = item.imageUrl)
+                                rememberAsyncImagePainter(model = "https://${item.imageUrl}")
 
                             if (image.state is AsyncImagePainter.State.Loading) {
                                 CircularProgressIndicator(

@@ -1,4 +1,4 @@
-package com.example.stylish.data.local
+package com.example.stylish.data.local.historyDatabase
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

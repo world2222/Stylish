@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.History
@@ -19,6 +20,7 @@ import androidx.compose.material3.SearchBar
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
@@ -27,7 +29,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.example.stylish.data.local.History
+import com.example.stylish.data.local.historyDatabase.History
 import com.example.stylish.data.local.viewModel.HistoryViewModel
 import com.example.stylish.presentation.search.main.SearchMainViewModel
 
@@ -74,8 +76,19 @@ fun SearchBarM3(
         val histories by dbViewModel.historyList.observeAsState(initial = emptyList())
         var deletingHistory by remember { mutableStateOf(History(keyword = "")) }
 
+        val listState = rememberLazyListState()
+
+        // By using LaunchedEffect, you can prevent it renders LazyColumn before it gets data.
+        LaunchedEffect(histories) {
+            // By using if here, it waits until it gets data from the dbViewModel.
+            if (histories.isNotEmpty()) {
+                listState.animateScrollToItem(histories.size - 1)
+            }
+        }
+
         LazyColumn(
             modifier = Modifier.fillMaxWidth(),
+            state = listState,
             reverseLayout = true
         ) {
             items(histories) { history ->
@@ -86,7 +99,8 @@ fun SearchBarM3(
                             onClick = {
                                 viewModel.setQuery(history.keyword)
                                 viewModel.toggleActive()
-                                histories.find { it.keyword == history.keyword }
+                                histories
+                                    .find { it.keyword == history.keyword }
                                     ?.let { dbViewModel.deleteHistory(it) }
                                 dbViewModel.addHistory(History(history.keyword))
                             },

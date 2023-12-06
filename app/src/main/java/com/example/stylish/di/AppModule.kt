@@ -1,9 +1,12 @@
 package com.example.stylish.di
 
 import android.content.Context
-import com.example.stylish.data.local.HistoryDao
-import com.example.stylish.data.local.HistoryDatabase
-import com.example.stylish.data.local.HistoryRepository
+import com.example.stylish.data.local.historyDatabase.HistoryDao
+import com.example.stylish.data.local.historyDatabase.HistoryDatabase
+import com.example.stylish.data.local.historyDatabase.HistoryRepository
+import com.example.stylish.data.local.wishlistDatabase.WishlistDao
+import com.example.stylish.data.local.wishlistDatabase.WishlistRepository
+import com.example.stylish.data.local.wishlistDatabase.WishlistDatabase
 import com.example.stylish.data.remote.dto.AsosApiService
 import com.example.stylish.data.remote.dto.AsosApiServiceImpl
 import com.example.stylish.domain.repository.AsosRepository
@@ -40,7 +43,7 @@ object AppModule {
             // Must delete before push!!!
             // -------------------------------------------------------------------------------------
             install(DefaultRequest) {
-                header("X-RapidAPI-Key", "8b4a83a0a4msh2efcbf9b25c23ccp11840cjsnbcfeeb83ac01")
+                header("X-RapidAPI-Key", "")
                 header("X-RapidAPI-Host", "asos10.p.rapidapi.com")
             }
             // -------------------------------------------------------------------------------------
@@ -64,6 +67,7 @@ object AppModule {
 
 
     // Room Database
+    // - History
     @Provides
     @Singleton
     fun provideHistoryDataBase(@ApplicationContext context: Context): HistoryDatabase {
@@ -80,5 +84,23 @@ object AppModule {
     @Singleton
     fun provideHistoryRepository(dao: HistoryDao): HistoryRepository {
         return HistoryRepository(dao)
+    }
+
+
+    // - Wishlist
+    @Provides
+    @Singleton
+    fun provideWishlistDatabase(@ApplicationContext context: Context): WishlistDatabase {
+        return WishlistDatabase.getWishlistDatabase(context)
+    }
+
+    @Provides
+    @Singleton
+    fun provideWishlistDao(db: WishlistDatabase): WishlistDao {
+        return db.wishlistDao()
+    }
+
+    fun provideWishlistRepository(dao: WishlistDao): WishlistRepository {
+        return WishlistRepository(dao)
     }
 }

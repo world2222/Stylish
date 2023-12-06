@@ -1,4 +1,4 @@
-package com.example.stylish.data.local
+package com.example.stylish.data.local.historyDatabase
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
