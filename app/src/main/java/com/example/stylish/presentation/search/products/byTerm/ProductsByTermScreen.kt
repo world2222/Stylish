@@ -52,6 +52,20 @@ fun ProductsByTermScreen(
 ) {
     LaunchedEffect(
         key1 = term,
+        key2 = sortType,
+        block = {
+            viewModel.getProductByItemTerm(
+                term = term,
+                sortType = sortType,
+                minPrice = minPrice,
+                maxPrice = maxPrice
+            )
+        }
+    )
+
+    LaunchedEffect(
+        key1 = minPrice,
+        key2 = maxPrice,
         block = {
             viewModel.getProductByItemTerm(
                 term = term,
