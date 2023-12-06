@@ -1,7 +1,6 @@
 package com.example.stylish.presentation.search.main.component
 
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.background
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -9,7 +8,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Close
@@ -30,8 +28,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.stylish.data.local.historyDatabase.History
@@ -44,13 +41,17 @@ fun SearchBarM3(
     viewModel: SearchMainViewModel = hiltViewModel(),
     dbViewModel: HistoryViewModel = hiltViewModel()
 ) {
+    val histories by dbViewModel.historyList.observeAsState(initial = emptyList())
+
     SearchBar(
         query = viewModel.query.value,
         onQueryChange = { viewModel.setQuery(it) },
-        onSearch = {
-            dbViewModel.addHistory(
-                history = History(viewModel.query.value)
-            )
+        onSearch = { currentKeyword ->
+            if (!histories.map { it.keyword }.contains(currentKeyword)) {
+                dbViewModel.addHistory(
+                    history = History(viewModel.query.value)
+                )
+            }
             viewModel.toggleActive()
         },
         active = viewModel.active.value,
@@ -89,7 +90,6 @@ fun SearchBarM3(
         }
     ) {
         var openDialog by remember { mutableStateOf(false) }
-        val histories by dbViewModel.historyList.observeAsState(initial = emptyList())
         var deletingHistory by remember { mutableStateOf(History(keyword = "")) }
 
         val listState = rememberLazyListState()
@@ -101,8 +101,6 @@ fun SearchBarM3(
                 listState.animateScrollToItem(histories.size - 1)
             }
         }
-
-        Conditions()
 
         LazyColumn(
             modifier = Modifier.fillMaxWidth(),
