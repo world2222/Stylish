@@ -55,7 +55,7 @@ fun CreateScreen(
                     .fillMaxHeight()
                     .background(viewModel.getColor(ItemNames.Shirt.name) ?: Color.White)
                     .clickable { viewModel.openDialog(ItemNames.Shirt.name) },
-                verticalArrangement = Arrangement.Center,
+                verticalArrangement = Arrangement.Bottom,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Spacer(modifier = Modifier.height(45.dp))
@@ -81,7 +81,7 @@ fun CreateScreen(
                     .fillMaxSize()
                     .background(viewModel.getColor(ItemNames.Pants.name) ?: Color.White)
                     .clickable { viewModel.openDialog(ItemNames.Pants.name) },
-                verticalArrangement = Arrangement.Center,
+                verticalArrangement = Arrangement.Top,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Image(
