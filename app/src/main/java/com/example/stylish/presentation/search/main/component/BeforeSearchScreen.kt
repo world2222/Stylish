@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
@@ -38,6 +39,8 @@ fun BeforeSearchScreen(
             GenderCard(gender = "Men", navController = navController, imageUrl = viewModel.menWomenImage.value[0])
             Spacer(modifier = Modifier.height(50.dp))
             GenderCard(gender = "Women", navController = navController, imageUrl = viewModel.menWomenImage.value[1])
+        } else {
+            CircularProgressIndicator()
         }
     }
 }
