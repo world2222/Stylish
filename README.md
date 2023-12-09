@@ -93,5 +93,10 @@ fun provideHttpClient(): HttpClient {
 
 <br>
 
+# License
+### Apache License 2.0
+
+<br>
+
 # Try *Stylish*, search and create your own fashion.
 ### Thank you for your visit, have a great day!
