@@ -51,7 +51,7 @@ But to check whether the color matches well trying all the clothes on, it's hard
 ![search by category](https://github.com/world2222/Stylish/assets/52661837/6dea6d17-aa77-4790-907c-f0970c92f2f9)
 ![search by term](https://github.com/world2222/Stylish/assets/52661837/d813207c-f3de-4fed-85e5-7f54593991ac)
 
-### Searh by Category & Search by Keyword
+### Search by Category & Search by Keyword
 *Stylish* offers the users to search the fashion items in a various ways.  
 You can search it following the categories or just search it with keywords.  
 Also, you can put some options when searching with keywords.  
