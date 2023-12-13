@@ -55,7 +55,8 @@ But to check whether the color matches well trying all the clothes on, it's hard
 *Stylish* offers the users to search the fashion items in a various ways.  
 You can search it following the categories or just search it with keywords.  
 Also, you can put some options when searching with keywords.  
-You can choose whether to sort it in ascending order or descending order or choose to show the recommended or fresh ones first.
+You can choose to sort it by ascending, descending, recommended, or latest order.  
+And you can set also the price limit.
 
 <br>
 
